@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>2026 글로벌 주가 대시보드 · 미국·한국·일본</title>
+<meta name="description" content="2026년 개장일 대비 미국·한국·일본 주식의 2개월말·4개월말·현재 시점 주가와 상승률 대시보드" />
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <h1>📈 2026 글로벌 주가 대시보드</h1>
+    <p class="sub">미국 · 한국 · 일본 &nbsp;|&nbsp; 2026년 개장일 대비 등락 추이</p>
+    <p class="meta" id="meta">데이터 불러오는 중…</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 검색 -->
+  <section class="controls">
+    <div class="search-box">
+      <input id="search" type="text" autocomplete="off"
+             placeholder="🔍 티커·종목명 입력 · 여러 개는 ; 로 구분 (예: AAPL; 삼성전자; Toyota)" />
+      <button id="clear" class="clear-btn" title="초기화">✕</button>
+      <ul id="suggest" class="suggest" hidden></ul>
+    </div>
+    <div class="market-tabs" id="tabs">
+      <button class="tab active" data-market="ALL">전체</button>
+      <button class="tab" data-market="US">🇺🇸 미국</button>
+      <button class="tab" data-market="KR">🇰🇷 한국</button>
+      <button class="tab" data-market="JP">🇯🇵 일본</button>
+    </div>
+  </section>
+
+  <!-- 선택 종목 상세 -->
+  <section id="detail" class="detail" hidden></section>
+
+  <!-- 기준일 안내 -->
+  <section class="legend" id="legend"></section>
+
+  <!-- 테이블 -->
+  <section class="table-wrap">
+    <table id="grid">
+      <thead>
+        <tr>
+          <th class="t-rank">#</th>
+          <th class="t-name" data-sort="name">종목</th>
+          <th class="t-mkt" data-sort="market">시장</th>
+          <th class="num" data-sort="p_open">개장일</th>
+          <th class="num" data-sort="p_m2">2개월말</th>
+          <th class="num sortable" data-sort="r_m2">2M 등락%</th>
+          <th class="num" data-sort="p_m4">4개월말</th>
+          <th class="num sortable" data-sort="r_m4">4M 등락%</th>
+          <th class="num" data-sort="p_cur">현재가</th>
+          <th class="num sortable active" data-sort="r_cur">현재 등락%</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p id="empty" class="empty" hidden>표시할 종목이 없습니다.</p>
+    <div class="more" id="more" hidden>
+      <button id="moreBtn">더 보기</button>
+    </div>
+  </section>
+</main>
+
+<footer class="foot wrap">
+  <p>데이터: Yahoo Finance (미·일) · FinanceDataReader (한) · 상승률은 각국 2026년 첫 거래일 종가 대비 ·
+     수정주가(배당·액면 반영) 기준. 투자 참고용이며 정확성을 보장하지 않습니다.</p>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
