@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>2026 글로벌 주가 대시보드 · 미국·한국·일본</title>
 <meta name="description" content="2026년 개장일 대비 미국·한국·일본 주식의 2개월말·4개월말·현재 시점 주가와 상승률 대시보드" />
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.webmanifest" />
+<meta name="theme-color" content="#0f1117" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="주가 대시보드" />
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+
 <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
@@ -71,5 +82,13 @@
 </footer>
 
 <script src="assets/app.js"></script>
+<script>
+  // 서비스 워커 등록 (오프라인 캐시 · PWA 설치 지원)
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("sw.js").catch((e) => console.warn("SW 등록 실패", e));
+    });
+  }
+</script>
 </body>
 </html>
