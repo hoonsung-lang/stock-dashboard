@@ -114,16 +114,16 @@ function renderRows() {
   tb.innerHTML = rows.map((s, i) => {
     const sub = s.submarket ? `<small>${s.submarket} · ${s.ticker}</small>` : `<small>${s.ticker}</small>`;
     return `<tr data-tk="${s.ticker}" data-mkt="${s.market}">
-      <td class="t-rank">${i + 1}</td>
-      <td><div class="nm">${esc(s.name)}${sub}</div></td>
-      <td><span class="mkt-badge">${MKT_LABEL[s.market] || s.market}</span></td>
-      <td class="num">${fmtPrice(s.p_open, s.market)}</td>
-      <td class="num">${fmtPrice(s.p_m2, s.market)}</td>
-      <td class="num ${cls(s.r_m2)}">${fmtPct(s.r_m2)}</td>
-      <td class="num">${fmtPrice(s.p_m4, s.market)}</td>
-      <td class="num ${cls(s.r_m4)}">${fmtPct(s.r_m4)}</td>
-      <td class="num">${fmtPrice(s.p_cur, s.market)}</td>
-      <td class="num ${cls(s.r_cur)}"><b>${fmtPct(s.r_cur)}</b></td>
+      <td class="t-rank" data-label="#">${i + 1}</td>
+      <td class="stock-cell" data-label="종목"><div class="nm">${esc(s.name)}${sub}</div></td>
+      <td class="market-cell" data-label="시장"><span class="mkt-badge">${MKT_LABEL[s.market] || s.market}</span></td>
+      <td class="num price-open" data-label="개장일 기준">${fmtPrice(s.p_open, s.market)}</td>
+      <td class="num price-m2" data-label="2개월말">${fmtPrice(s.p_m2, s.market)}</td>
+      <td class="num return-m2 ${cls(s.r_m2)}" data-label="등락률">${fmtPct(s.r_m2)}</td>
+      <td class="num price-m4" data-label="4개월말">${fmtPrice(s.p_m4, s.market)}</td>
+      <td class="num return-m4 ${cls(s.r_m4)}" data-label="등락률">${fmtPct(s.r_m4)}</td>
+      <td class="num price-cur" data-label="현재가">${fmtPrice(s.p_cur, s.market)}</td>
+      <td class="num return-cur ${cls(s.r_cur)}" data-label="현재 등락"><b>${fmtPct(s.r_cur)}</b></td>
     </tr>`;
   }).join("");
   $("#more").hidden = state.view.length <= state.shown;

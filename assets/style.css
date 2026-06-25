@@ -31,7 +31,7 @@ body {
   border-bottom: 1px solid var(--line);
   padding: 26px 0 20px;
 }
-.topbar h1 { margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.5px; }
+.topbar h1 { margin: 0; font-size: 24px; font-weight: 800; letter-spacing: 0; }
 .topbar .sub { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
 .topbar .meta { margin: 10px 0 0; color: var(--accent); font-size: 12px; }
 
@@ -108,7 +108,6 @@ body {
 .d-cell .date { color: var(--muted); font-size: 11px; }
 .d-cell .price { font-size: 20px; font-weight: 800; margin: 6px 0 2px; }
 .d-cell .chg { font-size: 14px; font-weight: 700; }
-@media (max-width: 720px){ .d-grid { grid-template-columns: repeat(2,1fr); } }
 
 /* 테이블 */
 .table-wrap { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
@@ -143,3 +142,242 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
 .more button:hover { border-color: var(--accent); }
 
 .foot { color: var(--muted); font-size: 12px; padding: 26px 18px 40px; line-height: 1.7; }
+
+@media (max-width: 720px) {
+  body { font-size: 13px; }
+  .wrap { padding: 0 12px; }
+
+  .topbar { padding: 18px 0 14px; }
+  .topbar h1 { font-size: 20px; line-height: 1.25; }
+  .topbar .sub { font-size: 12px; }
+  .topbar .meta { font-size: 11px; line-height: 1.45; }
+
+  .controls {
+    display: block;
+    margin: 14px 0 12px;
+  }
+  .search-box { width: 100%; }
+  .search-box input {
+    min-height: 46px;
+    padding: 11px 38px 11px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  .market-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .tab {
+    min-height: 40px;
+    padding: 8px 6px;
+    border-radius: 8px;
+    font-size: 12px;
+  }
+
+  .suggest { top: calc(100% + 6px); max-height: 260px; }
+  .suggest li { align-items: flex-start; flex-direction: column; gap: 2px; }
+
+  .legend {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    margin: 8px 0 12px;
+  }
+  .legend .pill {
+    border-radius: 8px;
+    padding: 7px 9px;
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  .detail {
+    margin-bottom: 12px;
+    padding: 14px;
+    border-radius: 10px;
+  }
+  .detail .d-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 7px;
+  }
+  .detail .d-name {
+    grid-column: 1 / -1;
+    font-size: 18px;
+    line-height: 1.3;
+  }
+  .detail .d-tk,
+  .detail .d-badge { align-self: center; }
+  .detail .d-close {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+    margin-left: 0;
+    padding: 7px 10px;
+  }
+  .d-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .d-cell {
+    min-width: 0;
+    padding: 11px;
+    border-radius: 8px;
+  }
+  .d-cell .price {
+    font-size: 17px;
+    line-height: 1.25;
+    word-break: break-word;
+  }
+
+  .table-wrap {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+  }
+  table,
+  tbody,
+  tr,
+  td { display: block; }
+  thead { display: none; }
+  tbody tr {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "stock stock"
+      "curPrice curReturn"
+      "m2Price m2Return"
+      "m4Price m4Return"
+      "open open";
+    gap: 8px 10px;
+    margin-bottom: 10px;
+    padding: 13px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  tbody tr:hover { background: var(--panel); }
+  tbody td {
+    min-width: 0;
+    padding: 0;
+    border-bottom: 0;
+    white-space: normal;
+    text-align: left;
+  }
+  tbody td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 2px;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 700;
+  }
+  td.num {
+    text-align: left;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+  .t-rank { display: none; }
+  .stock-cell {
+    grid-area: stock;
+    grid-column: 1 / -1;
+    padding-right: 88px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .stock-cell::before,
+  .market-cell::before { display: none; }
+  .nm {
+    font-size: 16px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+  .nm small {
+    margin-top: 2px;
+    font-size: 11px;
+    line-height: 1.3;
+  }
+  .market-cell {
+    position: absolute;
+    top: 13px;
+    right: 13px;
+    max-width: 82px;
+    text-align: right;
+  }
+  .mkt-badge {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    padding: 3px 7px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .price-cur,
+  .return-cur,
+  .price-open,
+  .price-m2,
+  .return-m2,
+  .price-m4,
+  .return-m4 {
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 10px;
+  }
+  .price-cur { grid-area: curPrice; }
+  .return-cur {
+    grid-area: curReturn;
+    text-align: right;
+  }
+  .return-cur::before { text-align: right; }
+  .return-cur b { font-size: 18px; line-height: 1.2; }
+  .price-open {
+    grid-area: open;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--muted);
+    background: transparent;
+    border-style: dashed;
+  }
+  .price-open::before { margin-bottom: 0; }
+  .price-open,
+  .price-m2,
+  .price-m4 { color: var(--text); }
+  .price-m2 { grid-area: m2Price; }
+  .return-m2 {
+    grid-area: m2Return;
+    text-align: right;
+  }
+  .return-m2::before { text-align: right; }
+  .price-m4 { grid-area: m4Price; }
+  .return-m4 {
+    grid-area: m4Return;
+    text-align: right;
+  }
+  .return-m4::before { text-align: right; }
+
+  .empty {
+    margin: 0;
+    padding: 32px 12px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  .more {
+    padding: 8px 0 0;
+  }
+  .more button {
+    width: 100%;
+    min-height: 44px;
+    border-radius: 8px;
+  }
+  .foot {
+    padding: 18px 12px 28px;
+    font-size: 11px;
+  }
+}
