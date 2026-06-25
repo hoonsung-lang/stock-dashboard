@@ -119,11 +119,11 @@ function renderRows() {
       <td class="market-cell" data-label="시장"><span class="mkt-badge">${MKT_LABEL[s.market] || s.market}</span></td>
       <td class="num price-open" data-label="개장일 기준">${fmtPrice(s.p_open, s.market)}</td>
       <td class="num price-m2" data-label="2개월말">${fmtPrice(s.p_m2, s.market)}</td>
-      <td class="num return-m2 ${cls(s.r_m2)}" data-label="등락률">${fmtPct(s.r_m2)}</td>
+      <td class="num return-m2 ${cls(s.r_m2)}" data-label="기준일 대비 등락률">${fmtPct(s.r_m2)}</td>
       <td class="num price-m4" data-label="4개월말">${fmtPrice(s.p_m4, s.market)}</td>
-      <td class="num return-m4 ${cls(s.r_m4)}" data-label="등락률">${fmtPct(s.r_m4)}</td>
+      <td class="num return-m4 ${cls(s.r_m4)}" data-label="기준일 대비 등락률">${fmtPct(s.r_m4)}</td>
       <td class="num price-cur" data-label="현재가">${fmtPrice(s.p_cur, s.market)}</td>
-      <td class="num return-cur ${cls(s.r_cur)}" data-label="현재 등락"><b>${fmtPct(s.r_cur)}</b></td>
+      <td class="num return-cur ${cls(s.r_cur)}" data-label="기준일 대비 등락률"><b>${fmtPct(s.r_cur)}</b></td>
     </tr>`;
   }).join("");
   $("#more").hidden = state.view.length <= state.shown;

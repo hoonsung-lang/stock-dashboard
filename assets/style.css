@@ -144,13 +144,13 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
 .foot { color: var(--muted); font-size: 12px; padding: 26px 18px 40px; line-height: 1.7; }
 
 @media (max-width: 720px) {
-  body { font-size: 13px; }
+  body { font-size: 14px; }
   .wrap { padding: 0 12px; }
 
   .topbar { padding: 18px 0 14px; }
-  .topbar h1 { font-size: 20px; line-height: 1.25; }
-  .topbar .sub { font-size: 12px; }
-  .topbar .meta { font-size: 11px; line-height: 1.45; }
+  .topbar h1 { font-size: 21px; line-height: 1.25; }
+  .topbar .sub { font-size: 13px; }
+  .topbar .meta { font-size: 12px; line-height: 1.45; }
 
   .controls {
     display: block;
@@ -161,7 +161,7 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
     min-height: 46px;
     padding: 11px 38px 11px 12px;
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 15px;
   }
   .market-tabs {
     display: grid;
@@ -173,7 +173,7 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
     min-height: 40px;
     padding: 8px 6px;
     border-radius: 8px;
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .suggest { top: calc(100% + 6px); max-height: 260px; }
@@ -188,7 +188,7 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
   .legend .pill {
     border-radius: 8px;
     padding: 7px 9px;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.35;
   }
 
@@ -250,8 +250,8 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
     grid-template-areas:
       "stock stock"
       "curPrice curReturn"
-      "m2Price m2Return"
       "m4Price m4Return"
+      "m2Price m2Return"
       "open open";
     gap: 8px 10px;
     margin-bottom: 10px;
@@ -273,12 +273,12 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
     display: block;
     margin-bottom: 2px;
     color: var(--muted);
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 700;
   }
   td.num {
     text-align: left;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.35;
   }
   .t-rank { display: none; }
@@ -292,13 +292,13 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
   .stock-cell::before,
   .market-cell::before { display: none; }
   .nm {
-    font-size: 16px;
+    font-size: 17px;
     line-height: 1.35;
     overflow-wrap: anywhere;
   }
   .nm small {
     margin-top: 2px;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.3;
   }
   .market-cell {
@@ -334,7 +334,7 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
     text-align: right;
   }
   .return-cur::before { text-align: right; }
-  .return-cur b { font-size: 18px; line-height: 1.2; }
+  .return-cur b { font-size: 20px; line-height: 1.2; }
   .price-open {
     grid-area: open;
     display: flex;
