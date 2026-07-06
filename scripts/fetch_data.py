@@ -1,25 +1,31 @@
 # -*- coding: utf-8 -*-
 """
-2026년 미국/한국/일본 주가 대시보드용 데이터 수집기.
+미국/한국/일본 주가 대시보드용 데이터 수집기.
 
 기준 시점(국가별 실제 거래일):
-  - open    : 2026년 첫 거래일
-  - m2      : 2월 마지막 거래일 (2개월 말)
-  - m4      : 4월 마지막 거래일 (4개월 말)
+  - open    : 해당 연도 첫 거래일
+  - m2/m4/… : 지나간 짝수달의 마지막 거래일 (config.checkpoints 가 자동 생성)
   - current : 최근 거래일
 
+연도는 실행 시점 기준 자동. 연초에 그 해 거래 데이터가 아직 없으면 전년도로 폴백.
 상승률(%) = (해당 시점가 / 개장일가 - 1) * 100
 
 출력: data/data.json
   {
     "generated_at": ISO8601,
-    "labels": {"open": "...", "m2": "...", "m4": "...", "current": "..."},
+    "year": 2026,
+    "checkpoints": ["m2", "m4", "m6", ...],        # 표시 순서
+    "labels": {"open": "...", "m2": "...", ..., "current": "..."},
     "dates":  {"US": {...}, "KR": {...}, "JP": {...}},
-    "stocks": [ {ticker, name, market, p_open, p_m2, p_m4, p_cur, r_m2, r_m4, r_cur}, ... ]
+    "failed_markets": [],                           # 수집 실패한 시장
+    "stocks": [ {ticker, name, market, p_open, p_m2, ..., p_cur,
+                 r_m2, ..., r_cur}, ... ]
   }
 
-미국/일본은 yfinance, 한국은 pykrx(시세) + FinanceDataReader(종목명) 사용.
-한 시장이 실패해도 나머지는 정상 수집되도록 try/except 로 격리한다.
+미국/일본은 yfinance, 한국은 FinanceDataReader 사용.
+한 시장이 실패해도 나머지는 정상 수집되도록 try/except 로 격리하되,
+실패 시장은 failed_markets 로 기록해 프런트에서 경고를 띄운다.
+전 시장 실패(종목 0개)면 파일을 쓰지 않고 종료코드 1 → Actions 가 실패로 감지.
 """
 import os
 import sys
@@ -48,15 +54,14 @@ def pct(cur, base):
 # ---------------------------------------------------------------------------
 # 미국 / 일본 (yfinance)
 # ---------------------------------------------------------------------------
-def fetch_yf(market, name_map, suffix=""):
+def fetch_yf(market, name_map, year, cps, suffix=""):
     import yfinance as yf
-    import pandas as pd
 
     tickers = [t + suffix for t in name_map.keys()]
     print(f"[{market}] {len(tickers)} 종목 다운로드 중...", flush=True)
 
     df = yf.download(
-        tickers, start=f"{config.YEAR}-01-01",
+        tickers, start=f"{year}-01-01",
         end=(TODAY + dt.timedelta(days=1)).isoformat(),
         auto_adjust=True, progress=False, group_by="ticker", threads=True,
     )
@@ -72,11 +77,9 @@ def fetch_yf(market, name_map, suffix=""):
         elig = [x for x in all_dates if x <= c]
         return elig[-1] if elig else None
 
-    d_open = all_dates[0]
-    d_m2 = resolve(config.CUTOFFS["m2"])
-    d_m4 = resolve(config.CUTOFFS["m4"])
-    d_cur = all_dates[-1]
-    dates = {"open": d_open, "m2": d_m2, "m4": d_m4, "current": d_cur}
+    dates = {"open": all_dates[0]}
+    dates.update({k: resolve(v) for k, v in cps.items()})
+    dates["current"] = all_dates[-1]
 
     def price_at(s, target):
         if target is None:
@@ -93,19 +96,18 @@ def fetch_yf(market, name_map, suffix=""):
             continue
         if s.empty:
             continue
-        p_open = price_at(s, d_open)
-        p_m2 = price_at(s, d_m2)
-        p_m4 = price_at(s, d_m4)
-        p_cur = price_at(s, d_cur)
+        p_open = price_at(s, dates["open"])
+        p_cur = price_at(s, dates["current"])
         if p_open is None or p_cur is None:
             continue
-        rows.append({
-            "ticker": code, "name": nm, "market": market,
-            "p_open": round2(p_open), "p_m2": round2(p_m2),
-            "p_m4": round2(p_m4), "p_cur": round2(p_cur),
-            "r_m2": pct(p_m2, p_open), "r_m4": pct(p_m4, p_open),
-            "r_cur": pct(p_cur, p_open),
-        })
+        row = {"ticker": code, "name": nm, "market": market,
+               "p_open": round2(p_open), "p_cur": round2(p_cur),
+               "r_cur": pct(p_cur, p_open)}
+        for k in cps:
+            p = price_at(s, dates[k])
+            row["p_" + k] = round2(p)
+            row["r_" + k] = pct(p, p_open)
+        rows.append(row)
     print(f"[{market}] {len(rows)} 종목 수집 완료", flush=True)
     return rows, {k: (v.isoformat() if v else None) for k, v in dates.items()}
 
@@ -115,12 +117,12 @@ def fetch_yf(market, name_map, suffix=""):
 #   * pykrx 의 KRX 직접 엔드포인트는 해외/클라우드 IP에서 차단되는 경우가 많아
 #     네이버 기반 FDR 로 일원화한다.
 # ---------------------------------------------------------------------------
-def fetch_kr(max_workers=12):
+def fetch_kr(year, cps, max_workers=12):
     from concurrent.futures import ThreadPoolExecutor, as_completed
     import FinanceDataReader as fdr
 
     # 거래일 달력: KOSPI 지수(KS11) 시계열에서 추출
-    ks = fdr.DataReader("KS11", f"{config.YEAR}-01-01")
+    ks = fdr.DataReader("KS11", f"{year}-01-01")
     trading_days = sorted(d.date() for d in ks.index)
     if not trading_days:
         raise RuntimeError("거래일 달력 수집 실패")
@@ -131,11 +133,9 @@ def fetch_kr(max_workers=12):
         elig = [x for x in trading_days if x <= c]
         return elig[-1] if elig else trading_days[0]
 
-    d_open = trading_days[0]
-    d_m2 = resolve(config.CUTOFFS["m2"])
-    d_m4 = resolve(config.CUTOFFS["m4"])
-    d_cur = trading_days[-1]
-    targets = {"open": d_open, "m2": d_m2, "m4": d_m4, "current": d_cur}
+    targets = {"open": trading_days[0]}
+    targets.update({k: resolve(v) for k, v in cps.items()})
+    targets["current"] = trading_days[-1]
     date_keys = {k: v.isoformat() for k, v in targets.items()}
     print(f"[KR] 기준일 {date_keys}", flush=True)
 
@@ -172,7 +172,7 @@ def fetch_kr(max_workers=12):
     def fetch_one(item):
         code, name, sub = item
         try:
-            df = fdr.DataReader(code, f"{config.YEAR}-01-01")
+            df = fdr.DataReader(code, f"{year}-01-01")
         except Exception:
             return None
         if df is None or df.empty or "Close" not in df.columns:
@@ -180,19 +180,18 @@ def fetch_kr(max_workers=12):
         s = df["Close"].dropna()
         if s.empty:
             return None
-        p_open = price_at(s, d_open)
-        p_cur = price_at(s, d_cur)
+        p_open = price_at(s, targets["open"])
+        p_cur = price_at(s, targets["current"])
         if not p_open or not p_cur:
             return None
-        p_m2 = price_at(s, d_m2)
-        p_m4 = price_at(s, d_m4)
-        return {
-            "ticker": code, "name": name, "market": "KR", "submarket": sub,
-            "p_open": round2(p_open), "p_m2": round2(p_m2),
-            "p_m4": round2(p_m4), "p_cur": round2(p_cur),
-            "r_m2": pct(p_m2, p_open), "r_m4": pct(p_m4, p_open),
-            "r_cur": pct(p_cur, p_open),
-        }
+        row = {"ticker": code, "name": name, "market": "KR", "submarket": sub,
+               "p_open": round2(p_open), "p_cur": round2(p_cur),
+               "r_cur": pct(p_cur, p_open)}
+        for k in cps:
+            p = price_at(s, targets[k])
+            row["p_" + k] = round2(p)
+            row["r_" + k] = pct(p, p_open)
+        return row
 
     rows = []
     done = 0
@@ -210,41 +209,50 @@ def fetch_kr(max_workers=12):
 
 
 # ---------------------------------------------------------------------------
+def collect(year):
+    """해당 연도 기준으로 3개 시장 수집. (stocks, dates, failed, cps) 반환."""
+    cps = config.checkpoints(year, TODAY)
+    print(f"기준 연도 {year} · 체크포인트 {list(cps)}", flush=True)
+    stocks, dates, failed = [], {}, []
+
+    jobs = [("US", lambda: fetch_yf("US", config.US_STOCKS, year, cps)),
+            ("JP", lambda: fetch_yf("JP", config.JP_STOCKS, year, cps, suffix=".T")),
+            ("KR", lambda: fetch_kr(year, cps))]
+    for market, job in jobs:
+        try:
+            rows, d = job()
+            stocks += rows
+            dates[market] = d
+        except Exception as e:
+            print(f"[{market}] 실패: {e}", flush=True)
+            failed.append(market)
+    return stocks, dates, failed, cps
+
+
 def main():
-    stocks = []
-    dates = {}
+    year = TODAY.year
+    stocks, dates, failed, cps = collect(year)
 
-    # 미국
-    try:
-        rows, d = fetch_yf("US", config.US_STOCKS, suffix="")
-        stocks += rows
-        dates["US"] = d
-    except Exception as e:
-        print(f"[US] 실패: {e}", flush=True)
+    # 연초: 그 해 거래 데이터가 아직 없으면 전년도 최종 성적으로 폴백
+    if not stocks and TODAY.month == 1:
+        print(f"\n{year}년 데이터 없음 → {year - 1}년으로 폴백", flush=True)
+        year -= 1
+        stocks, dates, failed, cps = collect(year)
 
-    # 일본
-    try:
-        rows, d = fetch_yf("JP", config.JP_STOCKS, suffix=".T")
-        stocks += rows
-        dates["JP"] = d
-    except Exception as e:
-        print(f"[JP] 실패: {e}", flush=True)
-
-    # 한국
-    try:
-        rows, d = fetch_kr()
-        stocks += rows
-        dates["KR"] = d
-    except Exception as e:
-        print(f"[KR] 실패: {e}", flush=True)
+    if not stocks:
+        print("\n전 시장 수집 실패 — data.json 을 갱신하지 않고 종료합니다.",
+              file=sys.stderr, flush=True)
+        sys.exit(1)
 
     # 라벨(대표 시장 기준 표기용)
     ref = dates.get("US") or dates.get("KR") or dates.get("JP") or {}
     payload = {
         "generated_at": dt.datetime.now().astimezone().isoformat(timespec="seconds"),
-        "year": config.YEAR,
+        "year": year,
+        "checkpoints": list(cps),
         "labels": ref,
         "dates": dates,
+        "failed_markets": failed,
         "count": len(stocks),
         "stocks": stocks,
     }
@@ -253,6 +261,8 @@ def main():
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, separators=(",", ":"))
     print(f"\n총 {len(stocks)} 종목 → {OUT}", flush=True)
+    if failed:
+        print(f"⚠️ 수집 실패 시장: {', '.join(failed)}", flush=True)
 
 
 if __name__ == "__main__":

@@ -6,26 +6,31 @@
 - 일본(JP): 닛케이225 주요 종목 큐레이션
 - 한국(KR): fetch_data.py 에서 pykrx/FDR 로 KOSPI/KOSDAQ 전체를 동적으로 수집
 
-기준 연도: 2026년
+기준 연도: 실행 시점의 연도를 자동 사용 (연초에 그 해 데이터가 아직 없으면
+fetch_data.py 가 전년도로 폴백).
 """
-
-YEAR = 2026
+import calendar
+import datetime as _dt
 
 # 한국: 시가총액 상위 N개를 '주요종목'으로 자동 선별 (전체 대신 큐레이션)
 KR_TOP_KOSPI = 200
 KR_TOP_KOSDAQ = 100
 
-# 기준 시점 컷오프(해당 일자 이전의 마지막 거래일을 사용)
-#  - open    : 연초 첫 거래일
-#  - m2      : 2개월 말(2월 마지막 거래일)
-#  - m4      : 4개월 말(4월 마지막 거래일)
-#  - current : 최근 거래일
-CUTOFFS = {
-    "open": (YEAR, 1, 2),    # 첫 거래일 탐색 시작점
-    "m2":   (YEAR, 2, 28),
-    "m4":   (YEAR, 4, 30),
-    # current 는 실행 시점(today)으로 동적 결정
-}
+
+def checkpoints(year, today=None):
+    """지나간 짝수달 말 기준시점을 자동 생성.
+
+    반환: {"m2": (y,2,28), "m4": (y,4,30), "m6": (y,6,30), ...}
+    (해당 월말이 today 이전인 것만 포함 — 연중 자동 확장)
+    개장일(open)·현재(current)는 fetch_data.py 가 거래일 달력에서 동적 결정.
+    """
+    today = today or _dt.date.today()
+    out = {}
+    for m in (2, 4, 6, 8, 10, 12):
+        last = calendar.monthrange(year, m)[1]
+        if _dt.date(year, m, last) <= today:
+            out[f"m{m}"] = (year, m, last)
+    return out
 
 # ---------------------------------------------------------------------------
 # 미국 대형주 (티커: 종목명)

@@ -14,7 +14,12 @@ const state = {
   shown: PAGE,
   selected: null,
   dates: {},
+  checkpoints: [], // ["m2","m4","m6",...] — 데이터가 정의
 };
+
+/* 체크포인트 라벨: "m6" → "6개월말" / "6M" */
+function cpLabel(k) { return k.slice(1) + "개월말"; }
+function cpShort(k) { return k.slice(1).toUpperCase() + "M"; }
 
 const $ = (s) => document.querySelector(s);
 
@@ -47,7 +52,10 @@ async function load() {
     const data = await res.json();
     state.all = data.stocks || [];
     state.dates = data.dates || {};
+    state.checkpoints = data.checkpoints || ["m2", "m4"]; // 구버전 data.json 호환
     renderMeta(data);
+    renderWarnings(data);
+    renderHeader();
     renderLegend(data);
     apply();
   } catch (e) {
@@ -60,6 +68,48 @@ function renderMeta(data) {
   const n = (data.stocks || []).length.toLocaleString();
   const gen = data.generated_at ? new Date(data.generated_at).toLocaleString("ko-KR") : "—";
   $("#meta").textContent = `총 ${n}개 종목 · 갱신 ${gen}`;
+  if (data.year) {
+    $("#title").textContent = `📈 ${data.year} 글로벌 주가 대시보드`;
+    $("#subtitle").innerHTML = `미국 · 한국 · 일본 &nbsp;|&nbsp; ${data.year}년 개장일 대비 등락 추이`;
+    document.title = `${data.year} 글로벌 주가 대시보드 · 미국·한국·일본`;
+  }
+}
+
+/* 갱신 실패 감지: 데이터가 오래됐거나 일부 시장 수집이 빠졌으면 경고 */
+function renderWarnings(data) {
+  const msgs = [];
+  if (data.generated_at) {
+    const ageH = (Date.now() - new Date(data.generated_at).getTime()) / 36e5;
+    if (ageH > 30) // 매일 07:00 KST 갱신 기준, 하루 이상 밀림
+      msgs.push(`⚠️ 데이터가 ${Math.floor(ageH)}시간째 갱신되지 않았습니다 — 자동 갱신이 실패했을 수 있습니다.`);
+  }
+  const missing = ["US", "KR", "JP"]
+    .filter((m) => (data.failed_markets || []).includes(m) || !(data.dates || {})[m])
+    .map((m) => MKT_LABEL[m] || m);
+  if (missing.length)
+    msgs.push(`⚠️ 일부 시장 데이터 누락: ${missing.join(", ")} (마지막 성공 수집분으로 표시될 수 있음)`);
+  const w = $("#warn");
+  w.textContent = msgs.join(" · ");
+  w.hidden = msgs.length === 0;
+}
+
+/* 기준 시점에 맞춰 테이블 헤더 생성 */
+function renderHeader() {
+  const cps = state.checkpoints;
+  let h = `
+    <th class="t-rank">#</th>
+    <th class="t-name" data-sort="name">종목</th>
+    <th class="t-mkt" data-sort="market">시장</th>
+    <th class="num" data-sort="p_open">개장일</th>`;
+  for (const k of cps) {
+    h += `
+    <th class="num" data-sort="p_${k}">${cpLabel(k)}</th>
+    <th class="num sortable" data-sort="r_${k}">${cpShort(k)} 등락%</th>`;
+  }
+  h += `
+    <th class="num" data-sort="p_cur">현재가</th>
+    <th class="num sortable${state.sortKey === "r_cur" ? " active" : ""}" data-sort="r_cur">현재 등락%</th>`;
+  $("#headrow").innerHTML = h;
 }
 
 function renderLegend(data) {
@@ -67,8 +117,7 @@ function renderLegend(data) {
   const fmt = (x) => (x ? x : "—");
   const pills = [
     ["개장일", fmt(d.open)],
-    ["2개월말", fmt(d.m2)],
-    ["4개월말", fmt(d.m4)],
+    ...state.checkpoints.map((k) => [cpLabel(k), fmt(d[k])]),
     ["현재", fmt(d.current)],
   ];
   $("#legend").innerHTML = pills
@@ -111,19 +160,24 @@ function renderRows() {
   const tb = $("#rows");
   const rows = state.view.slice(0, state.shown);
   $("#empty").hidden = state.view.length !== 0;
+  const cps = state.checkpoints;
   tb.innerHTML = rows.map((s, i) => {
     const sub = s.submarket ? `<small>${s.submarket} · ${s.ticker}</small>` : `<small>${s.ticker}</small>`;
+    // 모바일 카드 배치 순서(--ord): 종목 → 현재 → 최근 체크포인트부터 역순 → 개장일
+    let cpCells = "";
+    cps.forEach((k, idx) => {
+      const ord = 4 + (cps.length - 1 - idx) * 2; // 최신 체크포인트가 위로
+      cpCells += `
+      <td class="num price-cp" style="--ord:${ord}" data-label="${cpLabel(k)}">${fmtPrice(s["p_" + k], s.market)}</td>
+      <td class="num return-cp ${cls(s["r_" + k])}" style="--ord:${ord + 1}" data-label="기준일 대비 등락률">${fmtPct(s["r_" + k])}</td>`;
+    });
     return `<tr data-tk="${s.ticker}" data-mkt="${s.market}">
       <td class="t-rank" data-label="#">${i + 1}</td>
-      <td class="stock-cell" data-label="종목"><div class="nm">${esc(s.name)}${sub}</div></td>
+      <td class="stock-cell" style="--ord:1" data-label="종목"><div class="nm">${esc(s.name)}${sub}</div></td>
       <td class="market-cell" data-label="시장"><span class="mkt-badge">${MKT_LABEL[s.market] || s.market}</span></td>
-      <td class="num price-open" data-label="개장일 기준">${fmtPrice(s.p_open, s.market)}</td>
-      <td class="num price-m2" data-label="2개월말">${fmtPrice(s.p_m2, s.market)}</td>
-      <td class="num return-m2 ${cls(s.r_m2)}" data-label="기준일 대비 등락률">${fmtPct(s.r_m2)}</td>
-      <td class="num price-m4" data-label="4개월말">${fmtPrice(s.p_m4, s.market)}</td>
-      <td class="num return-m4 ${cls(s.r_m4)}" data-label="기준일 대비 등락률">${fmtPct(s.r_m4)}</td>
-      <td class="num price-cur" data-label="현재가">${fmtPrice(s.p_cur, s.market)}</td>
-      <td class="num return-cur ${cls(s.r_cur)}" data-label="기준일 대비 등락률"><b>${fmtPct(s.r_cur)}</b></td>
+      <td class="num price-open" style="--ord:90" data-label="개장일 기준">${fmtPrice(s.p_open, s.market)}</td>${cpCells}
+      <td class="num price-cur" style="--ord:2" data-label="현재가">${fmtPrice(s.p_cur, s.market)}</td>
+      <td class="num return-cur ${cls(s.r_cur)}" style="--ord:3" data-label="기준일 대비 등락률"><b>${fmtPct(s.r_cur)}</b></td>
     </tr>`;
   }).join("");
   $("#more").hidden = state.view.length <= state.shown;
@@ -139,8 +193,8 @@ function showDetail(stock) {
   state.selected = stock;
   const cells = [
     ["개장일", stock.p_open, null, mdate(stock.market, "open")],
-    ["2개월말", stock.p_m2, stock.r_m2, mdate(stock.market, "m2")],
-    ["4개월말", stock.p_m4, stock.r_m4, mdate(stock.market, "m4")],
+    ...state.checkpoints.map((k) =>
+      [cpLabel(k), stock["p_" + k], stock["r_" + k], mdate(stock.market, k)]),
     ["현재", stock.p_cur, stock.r_cur, mdate(stock.market, "current")],
   ];
   const sub = stock.submarket ? `<span class="d-badge">${stock.submarket}</span>` : "";
@@ -219,15 +273,16 @@ function init() {
     apply();
   });
 
-  document.querySelectorAll("thead th[data-sort]").forEach((th) => {
-    th.addEventListener("click", () => {
-      const k = th.dataset.sort;
-      if (state.sortKey === k) state.sortDir *= -1;
-      else { state.sortKey = k; state.sortDir = (k === "name" || k === "market") ? 1 : -1; }
-      document.querySelectorAll("thead th").forEach((t) => t.classList.remove("active"));
-      th.classList.add("active");
-      apply();
-    });
+  // 헤더는 데이터 로드 후 동적 생성되므로 위임 방식으로 바인딩
+  $("#headrow").addEventListener("click", (e) => {
+    const th = e.target.closest("th[data-sort]");
+    if (!th) return;
+    const k = th.dataset.sort;
+    if (state.sortKey === k) state.sortDir *= -1;
+    else { state.sortKey = k; state.sortDir = (k === "name" || k === "market") ? 1 : -1; }
+    document.querySelectorAll("thead th").forEach((t) => t.classList.remove("active"));
+    th.classList.add("active");
+    apply();
   });
 
   $("#rows").addEventListener("click", (e) => {

@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  issues: write   # 갱신 실패 시 이슈 생성용
 
 concurrency:
   group: update-data
@@ -40,4 +41,25 @@ jobs:
           else
             git commit -m "chore: update stock data ($(date -u +%Y-%m-%d))"
             git push
+          fi
+
+      # 수집/커밋 어느 단계든 실패하면 이슈로 알림 (열린 실패 이슈가 없을 때만)
+      - name: Open issue on failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create auto-update-failure --color D93F0B \
+            --description "주가 데이터 자동 갱신 실패" 2>/dev/null || true
+          open_count=$(gh issue list --label auto-update-failure --state open \
+            --json number --jq length)
+          if [ "$open_count" = "0" ]; then
+            gh issue create \
+              --title "⚠️ 주가 데이터 자동 갱신 실패 ($(date -u +%Y-%m-%d))" \
+              --label auto-update-failure \
+              --body "update-data 워크플로가 실패했습니다. 대시보드 데이터가 갱신되지 않고 있을 수 있습니다.
+
+실행 로그: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          else
+            echo "열린 실패 이슈가 이미 있음 — 중복 생성 생략"
           fi

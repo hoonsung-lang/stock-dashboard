@@ -34,6 +34,11 @@ body {
 .topbar h1 { margin: 0; font-size: 24px; font-weight: 800; letter-spacing: 0; }
 .topbar .sub { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
 .topbar .meta { margin: 10px 0 0; color: var(--accent); font-size: 12px; }
+.topbar .warn {
+  margin: 8px 0 0; padding: 8px 12px; border-radius: 8px;
+  background: rgba(255, 91, 91, .12); border: 1px solid rgba(255, 91, 91, .45);
+  color: #ff8a8a; font-size: 12px; line-height: 1.5;
+}
 
 /* 컨트롤 */
 .controls {
@@ -109,8 +114,8 @@ body {
 .d-cell .price { font-size: 20px; font-weight: 800; margin: 6px 0 2px; }
 .d-cell .chg { font-size: 14px; font-weight: 700; }
 
-/* 테이블 */
-.table-wrap { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+/* 테이블 (연말로 갈수록 기준 시점 열이 늘어나므로 가로 스크롤 허용) */
+.table-wrap { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; }
 thead th {
   position: sticky; top: 0; background: var(--panel-2); color: var(--muted);
@@ -243,16 +248,12 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
   tr,
   td { display: block; }
   thead { display: none; }
+  /* 카드 배치: 셀마다 app.js 가 지정한 --ord(order) 값으로 정렬
+     — 기준 시점 열 개수가 연중 변해도 레이아웃이 자동 대응 */
   tbody tr {
     position: relative;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-areas:
-      "stock stock"
-      "curPrice curReturn"
-      "m4Price m4Return"
-      "m2Price m2Return"
-      "open open";
     gap: 8px 10px;
     margin-bottom: 10px;
     padding: 13px;
@@ -260,6 +261,7 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
     border: 1px solid var(--line);
     border-radius: 10px;
   }
+  tbody td { order: var(--ord, 50); }
   tbody tr:hover { background: var(--panel); }
   tbody td {
     min-width: 0;
@@ -283,7 +285,6 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
   }
   .t-rank { display: none; }
   .stock-cell {
-    grid-area: stock;
     grid-column: 1 / -1;
     padding-right: 88px;
     padding-bottom: 8px;
@@ -319,24 +320,20 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
   .price-cur,
   .return-cur,
   .price-open,
-  .price-m2,
-  .return-m2,
-  .price-m4,
-  .return-m4 {
+  .price-cp,
+  .return-cp {
     background: var(--panel-2);
     border: 1px solid var(--line);
     border-radius: 8px;
     padding: 8px 10px;
   }
-  .price-cur { grid-area: curPrice; }
-  .return-cur {
-    grid-area: curReturn;
-    text-align: right;
-  }
-  .return-cur::before { text-align: right; }
+  .return-cur,
+  .return-cp { text-align: right; }
+  .return-cur::before,
+  .return-cp::before { text-align: right; }
   .return-cur b { font-size: 20px; line-height: 1.2; }
   .price-open {
-    grid-area: open;
+    grid-column: 1 / -1;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -346,20 +343,7 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
   }
   .price-open::before { margin-bottom: 0; }
   .price-open,
-  .price-m2,
-  .price-m4 { color: var(--text); }
-  .price-m2 { grid-area: m2Price; }
-  .return-m2 {
-    grid-area: m2Return;
-    text-align: right;
-  }
-  .return-m2::before { text-align: right; }
-  .price-m4 { grid-area: m4Price; }
-  .return-m4 {
-    grid-area: m4Return;
-    text-align: right;
-  }
-  .return-m4::before { text-align: right; }
+  .price-cp { color: var(--text); }
 
   .empty {
     margin: 0;

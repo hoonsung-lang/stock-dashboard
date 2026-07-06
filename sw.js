@@ -5,7 +5,7 @@
  */
 "use strict";
 
-const CACHE = "stock-dash-v4";
+const CACHE = "stock-dash-v5";
 const SHELL = [
   "./",
   "./index.html",
