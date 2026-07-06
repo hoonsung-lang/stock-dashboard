@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stock Scout Dashboard</title>
+<style>
+:root{--bg:#0f1420;--card:#1a2232;--line:#2a3550;--txt:#e8edf7;--sub:#8fa0bf;
+--acc:#ffd166;--pos:#3ddc97;--neg:#ff5a5a;--btn:#243050}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:'Segoe UI','Malgun Gothic',sans-serif;
+font-size:13px;max-width:1180px;margin:0 auto;padding:20px 18px 60px}
+h1{font-size:20px}
+h2{font-size:15px;color:var(--acc);margin:22px 0 10px;padding-bottom:5px;border-bottom:1px solid var(--line)}
+h3{font-size:13px;color:var(--sub);margin:14px 0 6px}
+.meta{color:var(--sub);font-size:11px;margin:4px 0 12px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;min-width:120px}
+.card .k{color:var(--sub);font-size:11px}.card .v{font-size:17px;font-weight:600;margin-top:2px}
+.card .d{font-size:11px;margin-top:2px}
+button{background:var(--btn);color:var(--txt);border:1px solid var(--line);border-radius:6px;
+padding:7px 14px;cursor:pointer;font-size:12px;font-family:inherit}
+button:hover{border-color:var(--acc)}
+button.running{color:var(--acc);border-color:var(--acc);pointer-events:none}
+.tabs{display:flex;gap:6px;margin:18px 0 4px;flex-wrap:wrap}
+.tabs button.active{background:var(--acc);color:#1a2232;font-weight:600}
+.panel{display:none}.panel.active{display:block}
+table{width:100%;border-collapse:collapse;margin:8px 0;font-size:12px}
+th{color:var(--sub);font-weight:500;text-align:right;padding:5px 7px;border-bottom:1px solid var(--line);
+white-space:nowrap;cursor:pointer;user-select:none}
+th:hover{color:var(--acc)}
+td{padding:5px 7px;text-align:right;border-bottom:1px solid #202a40;white-space:nowrap}
+th:first-child,td:first-child,th:nth-child(2),td:nth-child(2){text-align:left}
+.pos{color:var(--pos)}.neg{color:var(--neg)}
+.bar{display:inline-block;height:9px;border-radius:2px;vertical-align:middle;margin-right:5px}
+.tag{display:inline-block;background:#243050;color:var(--sub);border-radius:4px;padding:1px 7px;
+font-size:11px;margin:2px 3px 2px 0}
+.summary{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:13px 17px;
+margin:10px 0;line-height:1.7}
+.summary li{margin-left:16px}
+.call{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--acc);
+border-radius:6px;padding:10px 14px;margin:8px 0;line-height:1.6}
+.call b{color:var(--acc)}.risk{color:var(--sub);font-size:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:860px){.grid2{grid-template-columns:1fr}}
+a{color:#7db4ff}
+.stale{color:var(--neg)}
+</style>
+</head>
+<body>
+<h1>📡 Stock Scout Dashboard</h1>
+<div class="meta" id="freshness"></div>
+<div class="row" id="cards"></div>
+<div class="row" style="margin-top:10px" id="runbar">
+  <button id="run-kr">🇰🇷 한국 스캔</button>
+  <button id="run-us">🇺🇸 미국 스캔</button>
+  <button id="run-screen">🔍 스크리닝(느림)</button>
+  <button id="run-report">📄 리포트 생성</button>
+  <span id="jobmsg" class="meta"></span>
+</div>
+
+<div class="tabs">
+  <button data-tab="overview" class="active">개요</button>
+  <button data-tab="kr">한국 수급</button>
+  <button data-tab="us">미국 섹터</button>
+  <button data-tab="screen">스크리닝</button>
+  <button data-tab="reports">리포트</button>
+</div>
+<div id="overview" class="panel active"></div>
+<div id="kr" class="panel"></div>
+<div id="us" class="panel"></div>
+<div id="screen" class="panel"></div>
+<div id="reports" class="panel"></div>
+
+<script>
+let DATA = {};
+const $ = s => document.querySelector(s);
+const esc = x => x==null ? "-" : String(x).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt = (x,d=1,suf="") => (x==null||isNaN(x)) ? "-" : Number(x).toLocaleString(undefined,{minimumFractionDigits:d,maximumFractionDigits:d})+suf;
+const signed = (x,d=1,suf="") => {
+  if (x==null||isNaN(x)) return "-";
+  const cls = x>0?"pos":(x<0?"neg":"");
+  const s = (x>0?"+":"")+Number(x).toLocaleString(undefined,{minimumFractionDigits:d,maximumFractionDigits:d});
+  return `<span class="${cls}">${s}${suf}</span>`;
+};
+const bar = (x,mx,w=70) => {
+  if (x==null||!mx) return "";
+  const px = Math.min(Math.abs(x)/mx,1)*w, c = x>=0?"var(--pos)":"var(--neg)";
+  return `<span class="bar" style="width:${px.toFixed(0)}px;background:${c}"></span>`;
+};
+
+// 정렬 가능한 테이블: cols = [{h:헤더, f:row=>셀HTML, v:row=>정렬값}]
+function table(cols, rows, id){
+  window._tbl = window._tbl || {};
+  window._tbl[id] = {cols, rows, sort:null, asc:false};
+  return renderTable(id);
+}
+function renderTable(id){
+  const t = window._tbl[id];
+  let rows = [...t.rows];
+  if (t.sort!=null){
+    const c = t.cols[t.sort];
+    rows.sort((a,b)=>{
+      const va=c.v?c.v(a):null, vb=c.v?c.v(b):null;
+      if(va==null) return 1; if(vb==null) return -1;
+      return t.asc ? (va>vb?1:-1) : (va<vb?1:-1);
+    });
+  }
+  const th = t.cols.map((c,i)=>`<th onclick="sortTbl('${id}',${i})">${c.h}${t.sort===i?(t.asc?" ▲":" ▼"):""}</th>`).join("");
+  const trs = rows.map(r=>"<tr>"+t.cols.map(c=>`<td>${c.f(r)}</td>`).join("")+"</tr>").join("");
+  return `<div id="tbl-${id}"><table><tr>${th}</tr>${trs}</table></div>`;
+}
+function sortTbl(id,i){
+  const t = window._tbl[id];
+  t.asc = t.sort===i ? !t.asc : false;
+  t.sort = i;
+  document.getElementById("tbl-"+id).outerHTML = renderTable(id);
+}
+
+function renderHeader(){
+  const kr = DATA.kr_scan, us = DATA.us_scan, f = DATA.files||{};
+  let cards = "";
+  (kr?.indices||[]).forEach(ix=>{
+    cards += `<div class="card"><div class="k">${esc(ix.code)}</div><div class="v">${fmt(ix.close,2)}</div><div class="d">${signed(ix.changeRate,2,"%")}</div></div>`;
+  });
+  ["SPY","QQQ","SMH"].forEach(t=>{
+    const s = (us?.sector_etfs||[]).find(x=>x.ticker===t);
+    if(s) cards += `<div class="card"><div class="k">${t} ${esc(s.label)}</div><div class="v">${signed(s.ret_1m,1,"%")}<span style="font-size:11px;color:var(--sub)"> /1m</span></div><div class="d">3m ${signed(s.ret_3m,1,"%")}</div></div>`;
+  });
+  $("#cards").innerHTML = cards;
+  const now = new Date();
+  $("#freshness").innerHTML = "데이터 갱신: " + ["kr_scan","us_scan","kr_screen","us_screen","insights"]
+    .map(k=>{
+      if(!f[k]) return `${k} <span class="stale">없음</span>`;
+      const age = (now - new Date(f[k].replace(" ","T")))/36e5;
+      return `${k} ${age>30?'<span class="stale">':""}${esc(f[k])}${age>30?"</span>":""}`;
+    }).join(" · ");
+}
+
+function renderOverview(){
+  const ins = DATA.insights;
+  let h = "";
+  if(!ins){ $("#overview").innerHTML = "<div class='summary'>insights.json 없음 — Claude Code에서 \"수급 스캔 해줘\"로 분석을 생성하세요. 데이터 탭은 사용 가능합니다.</div>"; return; }
+  h += `<h2>${esc(ins.title)}</h2>`;
+  if(ins.summary) h += `<div class="summary"><b>핵심 요약</b><ul>${ins.summary.map(s=>`<li>${esc(s)}</li>`).join("")}</ul></div>`;
+  if(ins.kr_comment) h += `<h3>🇰🇷 코멘트</h3><div class="summary">${esc(ins.kr_comment)}</div>`;
+  if(ins.us_comment) h += `<h3>🇺🇸 코멘트</h3><div class="summary">${esc(ins.us_comment)}</div>`;
+  (ins.sector_calls||[]).forEach(s=>{
+    h += `<div class="call"><b>${esc(s.name)}</b> — ${esc(s.view)}<br><span class="risk">${esc(s.reason)}</span></div>`;
+  });
+  if(ins.stock_calls?.length){
+    h += "<h2>💡 종목 아이디어</h2>";
+    ins.stock_calls.forEach(s=>{
+      h += `<div class="call"><b>${esc(s.name)}${s.ticker?` (${esc(s.ticker)})`:""}</b> <span class="tag">${esc(s.market)}</span><br>${esc(s.thesis)}<br><span class="risk">리스크: ${esc(s.risk)}</span></div>`;
+    });
+  }
+  if(ins.watchlist) h += "<h2>👀 워치리스트</h2>" + ins.watchlist.map(w=>`<span class="tag">${esc(w)}</span>`).join("");
+  $("#overview").innerHTML = h;
+}
+
+function renderKR(){
+  const kr = DATA.kr_scan;
+  if(!kr){ $("#kr").innerHTML = "<div class='summary'>kr_scan.json 없음 — [한국 스캔] 버튼으로 수집하세요.</div>"; return; }
+  let h = "";
+  const inds = (kr.industries_top||[]).slice(0,12), thms = (kr.themes_top||[]).slice(0,12);
+  const mx = Math.max(...[...inds,...thms].map(g=>Math.abs(g.changeRate||0)),0.01);
+  const gcols = nm => [
+    {h:nm, f:r=>esc(r.name), v:r=>r.name},
+    {h:"등락", f:r=>bar(r.changeRate,mx)+signed(r.changeRate,2,"%"), v:r=>r.changeRate},
+    {h:"상승/전체", f:r=>`${r.riseCount}/${r.totalCount}`, v:r=>r.riseCount/(r.totalCount||1)}
+  ];
+  h += `<div class="grid2"><div><h3>업종 등락 상위</h3>${table(gcols("업종"),inds,"ind")}</div>`;
+  h += `<div><h3>테마 등락 상위</h3>${table(gcols("테마"),thms,"thm")}</div></div>`;
+
+  const sf = (kr.sector_flow||[]).filter(s=>s.industry!=="기타").slice(0,10);
+  if(sf.length){
+    const mxf = Math.max(...sf.map(s=>Math.abs(s.foreign_20d_100M)+Math.abs(s.organ_20d_100M)),1);
+    h += "<h3>업종별 외국인/기관 순매수 (20일 누적, 억원 — 순매수 상위종목 표본)</h3>";
+    h += table([
+      {h:"업종", f:r=>esc(r.industry), v:r=>r.industry},
+      {h:"외국인", f:r=>bar(r.foreign_20d_100M,mxf)+signed(r.foreign_20d_100M,0), v:r=>r.foreign_20d_100M},
+      {h:"기관", f:r=>signed(r.organ_20d_100M,0), v:r=>r.organ_20d_100M},
+      {h:"주요 종목", f:r=>esc(r.stocks.slice(0,4).join(", "))}
+    ], sf, "sf");
+  }
+  const focus = (kr.focus_stocks||[]).slice(0,20);
+  if(focus.length){
+    h += "<h3>당일 순매수 상위 종목 딥다이브 (억원)</h3>";
+    h += table([
+      {h:"종목", f:r=>esc(r.name), v:r=>r.name},
+      {h:"업종", f:r=>esc(r.industry), v:r=>r.industry},
+      {h:"종가", f:r=>fmt(r.close,0), v:r=>r.close},
+      {h:"외인5d", f:r=>signed(r.foreign_5d_100M,0), v:r=>r.foreign_5d_100M},
+      {h:"외인20d", f:r=>signed(r.foreign_20d_100M,0), v:r=>r.foreign_20d_100M},
+      {h:"기관20d", f:r=>signed(r.organ_20d_100M,0), v:r=>r.organ_20d_100M},
+      {h:"연속(외/기)", f:r=>`${r.foreign_streak||0}/${r.organ_streak||0}일`, v:r=>r.foreign_streak},
+      {h:"fwd PER", f:r=>fmt(r.cns_per,1), v:r=>r.cns_per},
+      {h:"목표가 괴리", f:r=>signed(r.upside_pct,0,"%"), v:r=>r.upside_pct}
+    ], focus, "focus");
+  }
+  $("#kr").innerHTML = h;
+}
+
+function renderUS(){
+  const us = DATA.us_scan;
+  if(!us){ $("#us").innerHTML = "<div class='summary'>us_scan.json 없음 — [미국 스캔] 버튼으로 수집하세요.</div>"; return; }
+  let h = "";
+  const etfs = (us.sector_etfs||[]).filter(s=>s.ticker!=="SPY");
+  const mx = Math.max(...etfs.map(s=>Math.abs(s.rs_3m||0)),0.01);
+  h += "<h3>섹터/테마 ETF — S&P500 대비 상대강도</h3>";
+  h += table([
+    {h:"ETF", f:r=>esc(r.ticker), v:r=>r.ticker},
+    {h:"테마", f:r=>esc(r.label), v:r=>r.label},
+    {h:"1w", f:r=>signed(r.ret_1w,1,"%"), v:r=>r.ret_1w},
+    {h:"1m", f:r=>signed(r.ret_1m,1,"%"), v:r=>r.ret_1m},
+    {h:"RS 3m", f:r=>bar(r.rs_3m,mx)+signed(r.rs_3m,1,"%p"), v:r=>r.rs_3m},
+    {h:"RS 6m", f:r=>signed(r.rs_6m,1,"%p"), v:r=>r.rs_6m},
+    {h:"52주고가比", f:r=>signed(r.off_52w_high_pct,1,"%"), v:r=>r.off_52w_high_pct},
+    {h:"거래량비", f:r=>fmt(r.vol_ratio_20_60,2), v:r=>r.vol_ratio_20_60}
+  ], etfs, "etf");
+
+  const mom = (us.momentum_top||[]);
+  if(mom.length){
+    h += "<h3>모멘텀 상위 (S&P500+NDX)</h3>";
+    h += table([
+      {h:"티커", f:r=>esc(r.ticker), v:r=>r.ticker},
+      {h:"종목", f:r=>esc(r.name), v:r=>r.name},
+      {h:"섹터", f:r=>esc(r.sector), v:r=>r.sector},
+      {h:"1m", f:r=>signed(r.ret_1m,1,"%"), v:r=>r.ret_1m},
+      {h:"3m", f:r=>signed(r.ret_3m,1,"%"), v:r=>r.ret_3m},
+      {h:"fwd PE", f:r=>fmt(r.forwardPE,1), v:r=>r.forwardPE},
+      {h:"EPS성장", f:r=>fmt(r.earningsGrowth_pct,0,"%"), v:r=>r.earningsGrowth_pct},
+      {h:"목표가 괴리", f:r=>signed(r.upside_pct,0,"%"), v:r=>r.upside_pct}
+    ], mom, "mom");
+    h += (us.momentum_sector_distribution||[]).map(([s,n])=>`<span class="tag">${esc(s)} × ${n}</span>`).join("");
+  }
+  $("#us").innerHTML = h;
+}
+
+function renderScreen(){
+  const krs = DATA.kr_screen, uss = DATA.us_screen;
+  let h = "";
+  if(krs){
+    const c = krs.criteria||{};
+    h += `<h3>🇰🇷 성장주 후보 (영업익성장≥${c.min_op_growth_pct}%, fwd PER≤${c.max_fwd_per}, ${esc(c.universe)} 중 ${krs.screened_total}종목)</h3>`;
+    h += table([
+      {h:"종목", f:r=>esc(r.name), v:r=>r.name},
+      {h:"종가", f:r=>fmt(r.close,0), v:r=>r.close},
+      {h:"매출성장", f:r=>signed(r.rev_growth_pct,0,"%"), v:r=>r.rev_growth_pct},
+      {h:"영업익성장", f:r=>signed(r.op_growth_pct,0,"%")+(r.turnaround?' <span class="tag">흑전</span>':""), v:r=>r.op_growth_pct},
+      {h:"fwd PER", f:r=>fmt(r.fwd_per,1), v:r=>r.fwd_per},
+      {h:"PEG", f:r=>fmt(r.peg_like,2), v:r=>r.peg_like},
+      {h:"fwd ROE", f:r=>fmt(r.fwd_roe,1), v:r=>r.fwd_roe},
+      {h:"목표가 괴리", f:r=>signed(r.upside_pct,0,"%"), v:r=>r.upside_pct},
+      {h:"52주고가比", f:r=>signed(r.off_52w_high_pct,0,"%"), v:r=>r.off_52w_high_pct}
+    ], krs.candidates||[], "krs");
+  }
+  if(uss){
+    const c = uss.criteria||{};
+    h += `<h3>🇺🇸 성장주 후보 (성장≥${c.min_growth_pct}%, Yahoo 프리셋 ${uss.screened_total}종목)</h3>`;
+    h += table([
+      {h:"티커", f:r=>esc(r.ticker), v:r=>r.ticker},
+      {h:"종목", f:r=>esc(r.name), v:r=>r.name},
+      {h:"섹터", f:r=>esc(r.sector), v:r=>r.sector},
+      {h:"시총(B$)", f:r=>fmt(r.marketCap_B,0), v:r=>r.marketCap_B},
+      {h:"매출성장", f:r=>signed(r.revenueGrowth_pct,0,"%"), v:r=>r.revenueGrowth_pct},
+      {h:"EPS성장", f:r=>signed(r.earningsGrowth_pct,0,"%"), v:r=>r.earningsGrowth_pct},
+      {h:"fwd PE", f:r=>fmt(r.forwardPE,1), v:r=>r.forwardPE},
+      {h:"PEG", f:r=>fmt(r.peg_like,2), v:r=>r.peg_like},
+      {h:"목표가 괴리", f:r=>signed(r.upside_pct,0,"%"), v:r=>r.upside_pct}
+    ], uss.candidates||[], "uss");
+  }
+  $("#screen").innerHTML = h || "<div class='summary'>스크리닝 결과 없음 — [스크리닝] 버튼으로 실행하세요 (약 5~8분).</div>";
+}
+
+function renderReports(){
+  const rs = DATA.reports||[];
+  const base = MODE==="static" ? "data/reports/" : "/reports/";
+  $("#reports").innerHTML = rs.length
+    ? "<h3>생성된 리포트</h3>" + rs.map(r=>`<div style="margin:6px 0">📄 <a href="${base}${esc(r)}" target="_blank">${esc(r)}</a></div>`).join("")
+    : "<div class='summary'>리포트 없음 — [리포트 생성] 버튼으로 생성하세요.</div>";
+}
+
+// 서버 모드(/api/data)와 정적 모드(data/*.json, GitHub Pages) 겸용
+let MODE = "server";
+async function loadStatic(){
+  const mf = await (await fetch("data/manifest.json")).json();
+  const out = {files: mf.files||{}, reports: mf.reports||[]};
+  for (const name of ["kr_scan","us_scan","kr_screen","us_screen","insights"]){
+    if (!out.files[name]) continue;
+    try { out[name] = await (await fetch(`data/${name}.json`)).json(); } catch(e){}
+  }
+  return out;
+}
+async function load(){
+  try {
+    const r = await fetch("/api/data");
+    if (!r.ok) throw new Error("no api");
+    DATA = await r.json();
+  } catch(e) {
+    MODE = "static";
+    $("#runbar").style.display = "none";
+    DATA = await loadStatic();
+  }
+  renderHeader(); renderOverview(); renderKR(); renderUS(); renderScreen(); renderReports();
+  if (MODE==="static")
+    $("#freshness").innerHTML += ' · <span class="tag">정적 미러 — 평일 아침 자동 갱신</span>';
+}
+
+// 실행 버튼 + 상태 폴링
+["kr","us","screen","report"].forEach(job=>{
+  $(`#run-${job}`).onclick = async ()=>{
+    await fetch(`/api/run?job=${job}`, {method:"POST"});
+    poll();
+  };
+});
+let pollTimer = null;
+async function poll(){
+  clearTimeout(pollTimer);
+  const st = await (await fetch("/api/status")).json();
+  let running = false, msgs = [];
+  for(const [job,s] of Object.entries(st)){
+    const btn = $(`#run-${job}`);
+    if(s.state==="running"){ running = true; btn.classList.add("running"); msgs.push(`${job} 실행중(${s.started}~)`); }
+    else {
+      if(btn.classList.contains("running")){ btn.classList.remove("running"); load(); }
+      if(s.state==="error") msgs.push(`${job} 오류: ${esc(s.tail||"")}`);
+    }
+  }
+  $("#jobmsg").innerHTML = msgs.join(" · ");
+  if(running) pollTimer = setTimeout(poll, 3000);
+}
+
+// 탭
+document.querySelectorAll(".tabs button").forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll(".tabs button").forEach(x=>x.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active");
+    document.getElementById(b.dataset.tab).classList.add("active");
+  };
+});
+
+load().then(()=>{ if (MODE==="server") poll(); });
+</script>
+</body>
+</html>
