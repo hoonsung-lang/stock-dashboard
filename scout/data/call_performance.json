@@ -1,0 +1,102 @@
+{
+ "_generated": "2026-07-06 22:36:49",
+ "summary": {
+  "n": 6,
+  "avg_ret_pct": 0.0,
+  "avg_excess_pct": 0.0,
+  "win_rate_pct": 0.0,
+  "beat_rate_pct": 0.0,
+  "best": "HD건설기계",
+  "worst": "Western Digital"
+ },
+ "benchmarks": {
+  "KR": "KOSPI(^KS11)",
+  "US": "S&P500(^GSPC)"
+ },
+ "calls": [
+  {
+   "name": "HD건설기계",
+   "ticker": "267270",
+   "market": "KR",
+   "call_date": "2026-07-06",
+   "entry_price": 123700.0,
+   "cur_price": 123700.0,
+   "cur_date": "2026-07-06",
+   "ret_pct": 0.0,
+   "bench_ret_pct": 0.0,
+   "excess_pct": 0.0,
+   "days": 0,
+   "mentions": 1
+  },
+  {
+   "name": "대덕전자",
+   "ticker": "353200",
+   "market": "KR",
+   "call_date": "2026-07-06",
+   "entry_price": 124000.0,
+   "cur_price": 124000.0,
+   "cur_date": "2026-07-06",
+   "ret_pct": 0.0,
+   "bench_ret_pct": 0.0,
+   "excess_pct": 0.0,
+   "days": 0,
+   "mentions": 1
+  },
+  {
+   "name": "S-Oil",
+   "ticker": "010950",
+   "market": "KR",
+   "call_date": "2026-07-06",
+   "entry_price": 116900.0,
+   "cur_price": 116900.0,
+   "cur_date": "2026-07-06",
+   "ret_pct": 0.0,
+   "bench_ret_pct": 0.0,
+   "excess_pct": 0.0,
+   "days": 0,
+   "mentions": 1
+  },
+  {
+   "name": "NC(엔씨소프트)",
+   "ticker": "036570",
+   "market": "KR",
+   "call_date": "2026-07-06",
+   "entry_price": 252500.0,
+   "cur_price": 252500.0,
+   "cur_date": "2026-07-06",
+   "ret_pct": 0.0,
+   "bench_ret_pct": 0.0,
+   "excess_pct": 0.0,
+   "days": 0,
+   "mentions": 1
+  },
+  {
+   "name": "Dell Technologies",
+   "ticker": "DELL",
+   "market": "US",
+   "call_date": "2026-07-06",
+   "entry_price": 408.506,
+   "cur_price": 408.506,
+   "cur_date": "2026-07-06",
+   "ret_pct": 0.0,
+   "bench_ret_pct": 0.0,
+   "excess_pct": 0.0,
+   "days": 0,
+   "mentions": 1
+  },
+  {
+   "name": "Western Digital",
+   "ticker": "WDC",
+   "market": "US",
+   "call_date": "2026-07-06",
+   "entry_price": 580.11,
+   "cur_price": 580.12,
+   "cur_date": "2026-07-06",
+   "ret_pct": 0.0,
+   "bench_ret_pct": 0.0,
+   "excess_pct": 0.0,
+   "days": 0,
+   "mentions": 1
+  }
+ ]
+}

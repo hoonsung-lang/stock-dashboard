@@ -56,6 +56,7 @@ a{color:#7db4ff}
   <button id="run-us">🇺🇸 미국 스캔</button>
   <button id="run-screen">🔍 스크리닝(느림)</button>
   <button id="run-report">📄 리포트 생성</button>
+  <button id="run-track">📊 성적표 갱신</button>
   <span id="jobmsg" class="meta"></span>
 </div>
 
@@ -64,12 +65,14 @@ a{color:#7db4ff}
   <button data-tab="kr">한국 수급</button>
   <button data-tab="us">미국 섹터</button>
   <button data-tab="screen">스크리닝</button>
+  <button data-tab="perf">성적표</button>
   <button data-tab="reports">리포트</button>
 </div>
 <div id="overview" class="panel active"></div>
 <div id="kr" class="panel"></div>
 <div id="us" class="panel"></div>
 <div id="screen" class="panel"></div>
+<div id="perf" class="panel"></div>
 <div id="reports" class="panel"></div>
 
 <script>
@@ -273,6 +276,39 @@ function renderScreen(){
   $("#screen").innerHTML = h || "<div class='summary'>스크리닝 결과 없음 — [스크리닝] 버튼으로 실행하세요 (약 5~8분).</div>";
 }
 
+function renderPerf(){
+  const p = DATA.call_performance;
+  if(!p || !(p.calls||[]).length){
+    $("#perf").innerHTML = "<div class='summary'>성적표 없음 — 아침 브리핑이 insights의 종목 콜을 자동 기록하며, 이후 수익률이 여기에 쌓입니다." +
+      (MODE==="server" ? " [성적표 갱신] 버튼으로 즉시 갱신할 수 있습니다." : "") + "</div>";
+    return;
+  }
+  const s = p.summary||{};
+  let h = "<h2>📊 추천 콜 성적표</h2>";
+  h += `<div class="row">
+    <div class="card"><div class="k">추적 콜</div><div class="v">${s.n??"-"}</div></div>
+    <div class="card"><div class="k">평균 수익률</div><div class="v">${signed(s.avg_ret_pct,1,"%")}</div></div>
+    <div class="card"><div class="k">평균 초과수익</div><div class="v">${signed(s.avg_excess_pct,1,"%p")}</div><div class="d">벤치마크 대비</div></div>
+    <div class="card"><div class="k">승률</div><div class="v">${fmt(s.win_rate_pct,0,"%")}</div><div class="d">수익 콜 비중</div></div>
+    <div class="card"><div class="k">벤치마크 상회율</div><div class="v">${fmt(s.beat_rate_pct,0,"%")}</div></div>
+  </div>`;
+  const mx = Math.max(...p.calls.map(r=>Math.abs(r.excess_pct||0)),0.01);
+  h += table([
+    {h:"종목", f:r=>`${esc(r.name)} <span class="tag">${esc(r.ticker)}</span>`, v:r=>r.name},
+    {h:"시장", f:r=>esc(r.market), v:r=>r.market},
+    {h:"추천일", f:r=>esc(r.call_date), v:r=>r.call_date},
+    {h:"기준가", f:r=>fmt(r.entry_price,r.market==="KR"?0:2), v:r=>r.entry_price},
+    {h:"현재가", f:r=>fmt(r.cur_price,r.market==="KR"?0:2), v:r=>r.cur_price},
+    {h:"수익률", f:r=>signed(r.ret_pct,1,"%"), v:r=>r.ret_pct},
+    {h:"벤치마크", f:r=>signed(r.bench_ret_pct,1,"%"), v:r=>r.bench_ret_pct},
+    {h:"초과수익", f:r=>bar(r.excess_pct,mx)+signed(r.excess_pct,1,"%p"), v:r=>r.excess_pct},
+    {h:"경과일", f:r=>fmt(r.days,0), v:r=>r.days},
+    {h:"언급", f:r=>fmt(r.mentions,0), v:r=>r.mentions}
+  ], p.calls, "perf");
+  h += `<div class="meta">벤치마크: KR=${esc((p.benchmarks||{}).KR||"KOSPI")}, US=${esc((p.benchmarks||{}).US||"S&P500")} · 기준가는 추천 시점 직전 거래일 종가 · 갱신 ${esc(p._generated||"")}</div>`;
+  $("#perf").innerHTML = h;
+}
+
 function renderReports(){
   const rs = DATA.reports||[];
   const base = MODE==="static" ? "data/reports/" : "/reports/";
@@ -286,7 +322,7 @@ let MODE = "server";
 async function loadStatic(){
   const mf = await (await fetch("data/manifest.json")).json();
   const out = {files: mf.files||{}, reports: mf.reports||[]};
-  for (const name of ["kr_scan","us_scan","kr_screen","us_screen","insights"]){
+  for (const name of ["kr_scan","us_scan","kr_screen","us_screen","insights","call_performance"]){
     if (!out.files[name]) continue;
     try { out[name] = await (await fetch(`data/${name}.json`)).json(); } catch(e){}
   }
@@ -302,13 +338,13 @@ async function load(){
     $("#runbar").style.display = "none";
     DATA = await loadStatic();
   }
-  renderHeader(); renderOverview(); renderKR(); renderUS(); renderScreen(); renderReports();
+  renderHeader(); renderOverview(); renderKR(); renderUS(); renderScreen(); renderPerf(); renderReports();
   if (MODE==="static")
     $("#freshness").innerHTML += ' · <span class="tag">정적 미러 — 평일 아침 자동 갱신</span>';
 }
 
 // 실행 버튼 + 상태 폴링
-["kr","us","screen","report"].forEach(job=>{
+["kr","us","screen","report","track"].forEach(job=>{
   $(`#run-${job}`).onclick = async ()=>{
     await fetch(`/api/run?job=${job}`, {method:"POST"});
     poll();
