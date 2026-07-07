@@ -2,7 +2,8 @@
 
 올해 **각국 개장일 종가** 대비 **짝수달 말(2·4·6·8·10·12월) / 현재** 시점의 주가와 상승률을
 한 화면에서 보여주는 정적 웹 대시보드입니다. 기준 시점은 달이 지날 때마다 자동으로 추가되고,
-연도도 실행 시점 기준으로 자동 전환됩니다. 티커·종목명 검색과 시장별 필터를 제공합니다.
+연도도 실행 시점 기준으로 자동 전환됩니다. 티커·종목명 검색, 시장별 필터,
+**최근 추이 스파크라인**과 **즐겨찾기**(⭐)를 제공합니다.
 
 - **미국**: 대형주(S&P500/나스닥 주요) 큐레이션 — Yahoo Finance
 - **일본**: 닛케이225 주요 종목 큐레이션 — Yahoo Finance (`.T`)
@@ -18,12 +19,14 @@ stock-dashboard/
 ├─ index.html                # 대시보드 페이지
 ├─ assets/
 │  ├─ style.css
-│  └─ app.js                 # 검색·필터·정렬·상세 (바닐라 JS)
+│  └─ app.js                 # 검색·필터·정렬·상세·스파크라인·즐겨찾기 (바닐라 JS)
 ├─ data/
-│  └─ data.json              # 수집 결과 (Actions 가 갱신)
+│  ├─ data.json              # 수집 결과 (Actions 가 갱신)
+│  └─ history.json           # 스파크라인용 종목별 종가 시계열 (커밋 히스토리에서 생성)
 ├─ scripts/
 │  ├─ config.py              # 미·일 종목 유니버스, 기준 시점
-│  └─ fetch_data.py          # 데이터 수집기
+│  ├─ fetch_data.py          # 데이터 수집기
+│  └─ build_history.py       # data.json 커밋들 → history.json (스파크라인 데이터)
 ├─ .github/workflows/
 │  └─ update-data.yml        # 매일 자동 갱신 워크플로
 └─ requirements.txt
@@ -41,6 +44,14 @@ stock-dashboard/
 색상은 한국식 관례(상승=빨강 🔴, 하락=파랑 🔵)를 따릅니다.
 연초에 그 해 거래 데이터가 아직 없으면 전년도 최종 데이터로 폴백합니다.
 
+## 스파크라인 · 즐겨찾기
+
+- **스파크라인(추이)**: 매일 커밋돼 온 `data/data.json` 의 과거 커밋에서 종목별 종가 시계열을
+  추출(`build_history.py` → `data/history.json`)해 각 행·상세 카드에 미니 추세선으로 표시.
+  별도 수집 없이 커밋 히스토리만 활용하며, Actions 가 데이터 갱신 후 매일 한 점씩 이어붙입니다.
+- **즐겨찾기(⭐)**: 각 행/상세의 별을 눌러 `localStorage` 에 저장(브라우저별 로컬). 상단
+  **⭐ 즐겨찾기** 탭으로 관심종목만 필터링. 서버 저장이 아니므로 개인정보가 노출되지 않습니다.
+
 ## 갱신 실패 감지
 
 - 데이터가 30시간 넘게 갱신되지 않거나 일부 시장 수집이 빠지면 페이지 상단에 경고 배너 표시
@@ -54,6 +65,7 @@ stock-dashboard/
 ```bash
 pip install -r requirements.txt
 python scripts/fetch_data.py      # data/data.json 생성
+python scripts/build_history.py   # data/history.json 생성 (스파크라인, 커밋 히스토리 필요)
 ```
 
 로컬 미리보기(정적 서버 필요 — fetch 는 file:// 에서 막힘):

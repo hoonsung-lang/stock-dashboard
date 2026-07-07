@@ -4,6 +4,8 @@
 const PAGE = 50;
 const MKT_LABEL = { US: "🇺🇸 미국", KR: "🇰🇷 한국", JP: "🇯🇵 일본" };
 
+const FAV_KEY = "stock-dash-favs"; // localStorage 즐겨찾기 키
+
 const state = {
   all: [],
   view: [],
@@ -15,7 +17,30 @@ const state = {
   selected: null,
   dates: {},
   checkpoints: [], // ["m2","m4","m6",...] — 데이터가 정의
+  history: {},     // "시장:티커" → [종가,...] (history.json)
+  hdates: [],      // 스파크라인 x축 날짜
+  favs: new Set(), // 즐겨찾기 "시장:티커"
+  favOnly: false,  // 즐겨찾기만 보기
 };
+
+/* 종목 고유 키 (즐겨찾기·히스토리 공용) */
+function fkey(s) { return s.market + ":" + s.ticker; }
+
+/* ---------- 즐겨찾기(localStorage) ---------- */
+function loadFavs() {
+  try {
+    const arr = JSON.parse(localStorage.getItem(FAV_KEY) || "[]");
+    state.favs = new Set(Array.isArray(arr) ? arr : []);
+  } catch { state.favs = new Set(); }
+}
+function saveFavs() {
+  try { localStorage.setItem(FAV_KEY, JSON.stringify([...state.favs])); } catch {}
+}
+function toggleFav(k) {
+  if (state.favs.has(k)) state.favs.delete(k);
+  else state.favs.add(k);
+  saveFavs();
+}
 
 /* 체크포인트 라벨: "m6" → "6개월말" / "6M" */
 function cpLabel(k) { return k.slice(1) + "개월말"; }
@@ -58,10 +83,48 @@ async function load() {
     renderHeader();
     renderLegend(data);
     apply();
+    loadHistory(); // 스파크라인은 부가 정보 → 본 데이터 렌더 뒤 비동기 로드
   } catch (e) {
     $("#meta").textContent = "데이터를 불러오지 못했습니다. (data/data.json 생성 대기 중일 수 있습니다)";
     console.error(e);
   }
+}
+
+/* 스파크라인 히스토리 로드(없거나 실패해도 대시보드는 정상 동작) */
+async function loadHistory() {
+  try {
+    const res = await fetch("data/history.json?_=" + Date.now());
+    if (!res.ok) return;
+    const h = await res.json();
+    state.history = h.series || {};
+    state.hdates = h.dates || [];
+    renderRows(); // 스파크라인 열을 채워 다시 그림
+  } catch (e) {
+    console.warn("history.json 로드 실패(스파크라인 생략)", e);
+  }
+}
+
+/* 종가 배열 → 인라인 SVG 미니 추세선. 시작<끝이면 상승색. */
+function sparkSVG(series) {
+  if (!series) return "";
+  const W = 100, H = 26, pad = 2;
+  const pts = series.map((v, i) => [i, v]).filter((p) => p[1] != null);
+  if (pts.length < 2) return "";
+  const xs = series.length - 1;
+  const vals = pts.map((p) => p[1]);
+  let lo = Math.min(...vals), hi = Math.max(...vals);
+  if (hi === lo) hi = lo + 1; // 완전 평평 → 중앙선
+  const X = (i) => pad + (i / xs) * (W - 2 * pad);
+  const Y = (v) => pad + (1 - (v - lo) / (hi - lo)) * (H - 2 * pad);
+  const d = pts
+    .map((p, k) => `${k ? "L" : "M"}${X(p[0]).toFixed(1)} ${Y(p[1]).toFixed(1)}`)
+    .join(" ");
+  const up = vals[vals.length - 1] >= vals[0];
+  const last = pts[pts.length - 1];
+  return `<svg class="spark ${up ? "up" : "down"}" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true">
+    <path d="${d}" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="${X(last[0]).toFixed(1)}" cy="${Y(last[1]).toFixed(1)}" r="2" fill="currentColor"/>
+  </svg>`;
 }
 
 function renderMeta(data) {
@@ -97,6 +160,7 @@ function renderWarnings(data) {
 function renderHeader() {
   const cps = state.checkpoints;
   let h = `
+    <th class="t-fav" title="즐겨찾기">★</th>
     <th class="t-rank">#</th>
     <th class="t-name" data-sort="name">종목</th>
     <th class="t-mkt" data-sort="market">시장</th>
@@ -108,7 +172,8 @@ function renderHeader() {
   }
   h += `
     <th class="num" data-sort="p_cur">현재가</th>
-    <th class="num sortable${state.sortKey === "r_cur" ? " active" : ""}" data-sort="r_cur">현재 등락%</th>`;
+    <th class="num sortable${state.sortKey === "r_cur" ? " active" : ""}" data-sort="r_cur">현재 등락%</th>
+    <th class="t-spark">추이</th>`;
   $("#headrow").innerHTML = h;
 }
 
@@ -131,6 +196,7 @@ function renderLegend(data) {
 function apply() {
   const terms = parseTerms(state.query);
   let v = state.all.filter((s) => {
+    if (state.favOnly && !state.favs.has(fkey(s))) return false;
     if (state.market !== "ALL" && s.market !== state.market) return false;
     if (terms.length) {
       const hay = (s.ticker + " " + s.name).toLowerCase();
@@ -171,13 +237,18 @@ function renderRows() {
       <td class="num price-cp" style="--ord:${ord}" data-label="${cpLabel(k)}">${fmtPrice(s["p_" + k], s.market)}</td>
       <td class="num return-cp ${cls(s["r_" + k])}" style="--ord:${ord + 1}" data-label="기준일 대비 등락률">${fmtPct(s["r_" + k])}</td>`;
     });
+    const k = fkey(s);
+    const on = state.favs.has(k);
+    const spark = sparkSVG(state.history[k]);
     return `<tr data-tk="${s.ticker}" data-mkt="${s.market}">
+      <td class="t-fav" style="--ord:0" data-label="즐겨찾기"><button class="star${on ? " on" : ""}" aria-pressed="${on}" title="즐겨찾기">${on ? "★" : "☆"}</button></td>
       <td class="t-rank" data-label="#">${i + 1}</td>
       <td class="stock-cell" style="--ord:1" data-label="종목"><div class="nm">${esc(s.name)}${sub}</div></td>
       <td class="market-cell" data-label="시장"><span class="mkt-badge">${MKT_LABEL[s.market] || s.market}</span></td>
       <td class="num price-open" style="--ord:90" data-label="개장일 기준">${fmtPrice(s.p_open, s.market)}</td>${cpCells}
       <td class="num price-cur" style="--ord:2" data-label="현재가">${fmtPrice(s.p_cur, s.market)}</td>
       <td class="num return-cur ${cls(s.r_cur)}" style="--ord:3" data-label="기준일 대비 등락률"><b>${fmtPct(s.r_cur)}</b></td>
+      <td class="t-spark" style="--ord:10" data-label="최근 추이">${spark}</td>
     </tr>`;
   }).join("");
   $("#more").hidden = state.view.length <= state.shown;
@@ -198,8 +269,18 @@ function showDetail(stock) {
     ["현재", stock.p_cur, stock.r_cur, mdate(stock.market, "current")],
   ];
   const sub = stock.submarket ? `<span class="d-badge">${stock.submarket}</span>` : "";
+  const k = fkey(stock);
+  const on = state.favs.has(k);
+  const series = state.history[k];
+  const sparkBlock = series
+    ? `<div class="d-spark">
+         <div class="d-spark-label">최근 ${state.hdates.length}일 추이 (${state.hdates[0] || ""} → ${state.hdates[state.hdates.length - 1] || ""})</div>
+         ${sparkSVG(series)}
+       </div>`
+    : "";
   $("#detail").innerHTML = `
     <div class="d-head">
+      <button class="star d-star${on ? " on" : ""}" id="dstar" aria-pressed="${on}" title="즐겨찾기">${on ? "★" : "☆"}</button>
       <span class="d-name">${esc(stock.name)}</span>
       <span class="d-tk">${stock.ticker}</span>
       <span class="d-badge">${MKT_LABEL[stock.market] || stock.market}</span>${sub}
@@ -213,9 +294,19 @@ function showDetail(stock) {
           <div class="price">${fmtPrice(p, stock.market)}</div>
           <div class="chg ${cls(r)}">${r == null ? "기준" : fmtPct(r)}</div>
         </div>`).join("")}
-    </div>`;
+    </div>
+    ${sparkBlock}`;
   $("#detail").hidden = false;
   $("#dclose").onclick = () => { $("#detail").hidden = true; state.selected = null; };
+  const ds = $("#dstar");
+  if (ds) ds.onclick = () => {
+    toggleFav(k);
+    const nowOn = state.favs.has(k);
+    ds.classList.toggle("on", nowOn);
+    ds.textContent = nowOn ? "★" : "☆";
+    ds.setAttribute("aria-pressed", nowOn);
+    renderRows(); // 표의 별 상태·즐겨찾기 필터 동기화
+  };
   $("#detail").scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 function mdate(market, key) {
@@ -266,8 +357,8 @@ function init() {
 
   $("#tabs").addEventListener("click", (e) => {
     const b = e.target.closest(".tab");
-    if (!b) return;
-    document.querySelectorAll(".tab").forEach((t) => t.classList.remove("active"));
+    if (!b || !b.dataset.market) return; // 즐겨찾기 탭(data-market 없음)은 별도 처리
+    document.querySelectorAll(".tab[data-market]").forEach((t) => t.classList.remove("active"));
     b.classList.add("active");
     state.market = b.dataset.market;
     apply();
@@ -289,13 +380,30 @@ function init() {
     const tr = e.target.closest("tr");
     if (!tr) return;
     const s = state.all.find((x) => x.ticker === tr.dataset.tk && x.market === tr.dataset.mkt);
-    if (s) showDetail(s);
+    if (!s) return;
+    // 별 클릭: 상세 열지 않고 즐겨찾기만 토글
+    if (e.target.closest(".star")) {
+      toggleFav(fkey(s));
+      if (state.favOnly) apply(); // 즐겨찾기만 보기 중이면 목록 갱신
+      else renderRows();
+      if (state.selected && fkey(state.selected) === fkey(s)) showDetail(s); // 상세 별 동기화
+      return;
+    }
+    showDetail(s);
+  });
+
+  // 즐겨찾기 필터 토글(시장 탭과 독립)
+  $("#favTab").addEventListener("click", (e) => {
+    state.favOnly = !state.favOnly;
+    e.currentTarget.classList.toggle("active", state.favOnly);
+    apply();
   });
 
   $("#moreBtn").addEventListener("click", () => {
     state.shown += PAGE; renderRows();
   });
 
+  loadFavs();
   load();
 }
 

@@ -43,6 +43,20 @@ jobs:
             git push
           fi
 
+      # data.json 커밋 뒤 실행 → 오늘치 종가가 스파크라인 히스토리에 포함됨
+      - name: Build sparkline history
+        run: python scripts/build_history.py
+
+      - name: Commit history
+        run: |
+          git add data/history.json
+          if git diff --staged --quiet; then
+            echo "history 변경 없음 — 커밋 생략"
+          else
+            git commit -m "chore: update sparkline history ($(date -u +%Y-%m-%d))"
+            git push
+          fi
+
       # 수집/커밋 어느 단계든 실패하면 이슈로 알림 (열린 실패 이슈가 없을 때만)
       - name: Open issue on failure
         if: failure()

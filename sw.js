@@ -5,7 +5,7 @@
  */
 "use strict";
 
-const CACHE = "stock-dash-v5";
+const CACHE = "stock-dash-v6";
 const SHELL = [
   "./",
   "./index.html",
@@ -36,8 +36,8 @@ self.addEventListener("fetch", (e) => {
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return; // 외부 요청은 패스
 
-  // 데이터 및 scout 대시보드(매일 갱신): 네트워크 우선 → 캐시 폴백
-  if (url.pathname.endsWith("/data/data.json") || url.pathname.includes("/scout/")) {
+  // 데이터(주가·히스토리) 및 scout 대시보드(매일 갱신): 네트워크 우선 → 캐시 폴백
+  if (url.pathname.endsWith("/data/data.json") || url.pathname.endsWith("/data/history.json") || url.pathname.includes("/scout/")) {
     e.respondWith(
       fetch(req)
         .then((res) => {
