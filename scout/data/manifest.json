@@ -4,15 +4,16 @@
   "us_scan": "2026-07-09 12:26",
   "kr_screen": "2026-07-09 21:44",
   "us_screen": "2026-07-09 21:45",
-  "insights": "2026-07-09 21:52",
-  "call_performance": "2026-07-09 21:53"
+  "insights": "2026-07-10 07:43",
+  "call_performance": "2026-07-10 07:43"
  },
  "reports": [
+  "scout_report_20260710.html",
   "scout_report_20260709.html",
   "scout_report_20260706_2111.html",
   "scout_report_20260706.html"
  ],
  "published": "2026-07-09 21:46",
  "scan_published": "2026-07-09 21:46",
- "insight_published": "2026-07-09 21:53"
+ "insight_published": "2026-07-10 07:48"
 }
