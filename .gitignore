@@ -4,3 +4,7 @@ __pycache__/
 .venv/
 venv/
 *.log
+
+# scout 클라우드 스캔의 임시 산출물 (발행물은 scout/data/ 뿐)
+scout/engine/output/
+scout/engine/data/

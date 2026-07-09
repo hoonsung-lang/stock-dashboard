@@ -1,0 +1,87 @@
+name: Scout market scan
+
+on:
+  schedule:
+    # 매일 22:20 UTC (한국시간 익일 07:20) — update-data(22:00) 뒤, 로컬 아침 브리핑(07:30 KST) 앞
+    - cron: "20 22 * * 1-5"
+  workflow_dispatch: {}   # 수동 실행 버튼
+
+permissions:
+  contents: write
+  issues: write   # 스캔 실패 시 이슈 생성용
+
+concurrency:
+  group: scout-scan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: scout/engine
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: scout/engine/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Scan KR (수급/섹터)
+        run: python -X utf8 scripts/scan_kr.py --trend-top 25
+
+      - name: Scan US (섹터 RS/모멘텀)
+        run: python -X utf8 scripts/scan_us.py --deep-top 30
+
+      # 성장주 스크리닝은 컨센서스가 느리게 변해 주 1회면 충분 → 월요일만.
+      # 그 외 요일엔 scout/data 의 기존 스크리닝을 유지(publish_scan 이 건드리지 않음).
+      - name: Screen growth (월요일 또는 스크리닝 부재 시)
+        run: |
+          if [ "$(date -u +%u)" = "1" ] || [ ! -f ../data/kr_screen.json ]; then
+            python -X utf8 scripts/screen_growth.py --market all
+          else
+            echo "월요일 아님 · 기존 스크리닝 유지 — screen_growth 생략"
+          fi
+
+      - name: Publish scan → scout/data
+        run: python -X utf8 publish_scan.py
+
+      - name: Commit & push
+        working-directory: .
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add scout/data
+          if git diff --staged --quiet; then
+            echo "변경 없음 — 커밋 생략"
+          else
+            git commit -m "chore: update scout scan ($(date -u +%Y-%m-%d))"
+            git pull --rebase
+            git push
+          fi
+
+      # 스캔/발행 실패 시 이슈로 알림 (열린 실패 이슈가 없을 때만)
+      - name: Open issue on failure
+        if: failure()
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create scout-scan-failure --color D93F0B \
+            --description "scout 시장 스캔 자동 실행 실패" 2>/dev/null || true
+          open_count=$(gh issue list --label scout-scan-failure --state open \
+            --json number --jq length)
+          if [ "$open_count" = "0" ]; then
+            body=$'scout-scan 워크플로가 실패했습니다. scout 대시보드의 시장 스캔 데이터가 갱신되지 않고 있을 수 있습니다.\n\n실행 로그: '"${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            gh issue create \
+              --title "⚠️ scout 시장 스캔 실패 ($(date -u +%Y-%m-%d))" \
+              --label scout-scan-failure \
+              --body "$body"
+          else
+            echo "열린 실패 이슈가 이미 있음 — 중복 생성 생략"
+          fi
