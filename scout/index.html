@@ -263,11 +263,14 @@ function renderScreen(){
 // 서버 모드(/api/data)와 정적 모드(data/*.json, GitHub Pages) 겸용
 let MODE = "server";
 async function loadStatic(){
-  const mf = await (await fetch("data/manifest.json")).json();
+  // manifest는 항상 최신(no-store), 각 데이터는 manifest의 갱신시각을 캐시버스터로
+  // 붙여 데이터가 바뀔 때만 새로 받는다 (구버전 JSON 캐시로 값이 '-' 되는 문제 방지).
+  const mf = await (await fetch("data/manifest.json", {cache:"no-store"})).json();
   const out = {files: mf.files||{}};
   for (const name of ["kr_scan","us_scan","kr_screen","us_screen"]){
     if (!out.files[name]) continue;
-    try { out[name] = await (await fetch(`data/${name}.json`)).json(); } catch(e){}
+    const v = encodeURIComponent(out.files[name]);
+    try { out[name] = await (await fetch(`data/${name}.json?v=${v}`)).json(); } catch(e){}
   }
   return out;
 }
