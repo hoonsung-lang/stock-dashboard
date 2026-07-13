@@ -37,13 +37,40 @@ SECTOR_ETFS = {
 }
 
 
+def _drop_intraday(df):
+    """미완성 장중 봉 제거 → 항상 마지막 '정규 종가' 기준.
+
+    yfinance 일봉은 장중에 돌리면 당일(ET) 봉이 미완성 상태로 들어온다.
+    스캔 시점 ET가 정규장 마감(16:00) 전이고 마지막 봉 날짜가 오늘이면 그
+    봉을 버린다. 자동 실행(18:20 ET)은 마감 후라 영향 없음.
+    """
+    if len(df.index) == 0:
+        return df
+    from datetime import datetime
+    try:
+        from zoneinfo import ZoneInfo
+        et = datetime.now(ZoneInfo("America/New_York"))
+    except Exception:
+        return df  # tz 정보 없으면 원본 유지(자동 실행은 마감 후라 안전)
+    last_date = str(df.index[-1].date() if hasattr(df.index[-1], "date")
+                    else df.index[-1])[:10]
+    if last_date == et.strftime("%Y-%m-%d") and et.hour < 16:
+        return df.iloc[:-1]
+    return df
+
+
 def download_prices(tickers, period="1y"):
-    """종가 DataFrame(index=date, columns=ticker)과 거래량 DataFrame."""
+    """종가 DataFrame(index=date, columns=ticker)과 거래량 DataFrame.
+
+    장중 미완성 봉은 제외해 항상 마지막 정규 종가를 반환한다.
+    """
     raw = yf.download(list(tickers), period=period, progress=False,
                       auto_adjust=True, group_by="column", threads=True)
     close = raw["Close"] if isinstance(raw.columns, pd.MultiIndex) else raw[["Close"]]
     vol = raw["Volume"] if isinstance(raw.columns, pd.MultiIndex) else raw[["Volume"]]
-    return close.dropna(how="all"), vol
+    close = _drop_intraday(close.dropna(how="all"))
+    vol = vol.reindex(close.index)
+    return close, vol
 
 
 def perf_table(close, vol=None, benchmark="SPY"):
