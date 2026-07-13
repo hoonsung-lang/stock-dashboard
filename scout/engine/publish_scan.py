@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
-"""클라우드 스캔 결과를 scout/data/ 에 발행 (매니페스트 merge).
+"""클라우드 스캔 결과를 scout/data/ 에 발행 (매니페스트 갱신).
 
 GitHub Actions(scout-scan.yml)에서 스캔 스크립트 실행 후 호출한다.
-스캔 JSON(kr_scan/us_scan/kr_screen/us_screen)만 갱신하고, insights·성적표·
-리포트 등 Claude(로컬)가 소유하는 항목은 건드리지 않는다 — manifest 를 읽어
-자기 키만 덮어쓰는 merge 방식이라 두 발행자가 같은 리포에 충돌 없이 쓴다.
+스캔 JSON(kr_scan/us_scan/kr_screen/us_screen)을 scout/data/ 에 복사하고
+manifest.json에 각 파일의 생성 시각을 기록한다.
+
+과거에는 로컬 Claude 세션이 insights(정성 분석)·성적표·리포트를 별도로
+발행해 manifest를 merge 방식으로 공유했으나, 그 기능은 제거되었다
+(2026-07-13). 이제 scout-scan(이 스크립트)이 manifest의 유일한 발행자다.
 
 사용: python -X utf8 publish_scan.py [--only kr_scan us_scan ...]
   (기본: engine/output 에 존재하는 스캔 JSON 전부)

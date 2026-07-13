@@ -2,8 +2,11 @@ name: Scout market scan
 
 on:
   schedule:
-    # 매일 22:20 UTC (한국시간 익일 07:20) — update-data(22:00) 뒤, 로컬 아침 브리핑(07:30 KST) 앞
-    - cron: "20 22 * * 1-5"
+    # 매일 22:20 UTC (한국시간 익일 07:20) — update-data(22:00) 뒤
+    # 주의: GitHub Actions 스케줄은 UTC 요일로 평가된다. KST 월~금 아침에 착지시키려면
+    # UTC 요일은 하루 당겨서 일~목(0-4)이어야 한다 (월~금(1-5)로 쓰면 KST 월요일이
+    # 스킵되고 대신 필요없는 토요일 아침에 실행되는 버그가 생김 — 2026-07-13 실측 확인).
+    - cron: "20 22 * * 0-4"
   workflow_dispatch: {}   # 수동 실행 버튼
 
 permissions:
