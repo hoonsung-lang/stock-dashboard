@@ -13,15 +13,38 @@ API = "https://m.stock.naver.com/api"
 
 # ---------------------------------------------------------------- 지수
 def get_index(code="KOSPI"):
-    """KOSPI/KOSDAQ 지수 현재가·등락."""
+    """KOSPI/KOSDAQ 지수 현재가·당일등락·1개월 등락률."""
     j = get_json(f"{API}/index/{code}/basic")
+    close = num(j.get("closePrice"))
     return {
         "code": code,
-        "close": num(j.get("closePrice")),
+        "close": close,
         "change": num(j.get("compareToPreviousClosePrice")),
         "changeRate": num(j.get("fluctuationsRatio")),
+        "chg_1m_pct": _index_chg_1m(code, close),
         "date": j.get("localTradedAt", "")[:10],
     }
+
+
+def _index_chg_1m(code, close):
+    """지수 일별 시세로 1개월(캘린더 30일) 전 종가 대비 등락률(%). 실패 시 None."""
+    if not close:
+        return None
+    try:
+        from datetime import datetime, timedelta
+        rows = get_json(f"{API}/index/{code}/price?pageSize=30&page=1")
+        if not rows:
+            return None
+        latest = datetime.strptime(rows[0]["localTradedAt"][:10], "%Y-%m-%d")
+        cutoff = latest - timedelta(days=30)
+        # 30일 전 이하 날짜 중 가장 최근 종가 (없으면 가장 오래된 행)
+        ref = next((r for r in rows
+                    if datetime.strptime(r["localTradedAt"][:10], "%Y-%m-%d") <= cutoff),
+                   rows[-1])
+        base = num(ref["closePrice"])
+        return round((close / base - 1) * 100, 2) if base else None
+    except Exception:
+        return None
 
 
 # ---------------------------------------------------------------- 업종/테마

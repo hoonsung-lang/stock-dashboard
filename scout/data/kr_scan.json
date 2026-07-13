@@ -1,11 +1,12 @@
 {
- "_generated": "2026-07-13 22:57:46",
+ "_generated": "2026-07-13 23:24:27",
  "indices": [
   {
    "code": "KOSPI",
    "close": 6806.93,
    "change": -669.01,
    "changeRate": -8.95,
+   "chg_1m_pct": -16.21,
    "date": "2026-07-13"
   },
   {
@@ -13,6 +14,7 @@
    "close": 799.36,
    "change": -38.07,
    "changeRate": -4.55,
+   "chg_1m_pct": -22.32,
    "date": "2026-07-13"
   }
  ],

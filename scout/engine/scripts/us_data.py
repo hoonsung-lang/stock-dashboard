@@ -54,8 +54,10 @@ def perf_table(close, vol=None, benchmark="SPY"):
         return (close.iloc[-1] / close.iloc[-1 - days] - 1) * 100
 
     r = pd.DataFrame({
+        "ret_1d": ret(1),
         "ret_1w": ret(5), "ret_1m": ret(21), "ret_3m": ret(63), "ret_6m": ret(126),
     })
+    r["close"] = close.iloc[-1]  # 최근 종가(레벨) — 카드 표시용
     r["off_52w_high_pct"] = (close.iloc[-1] / close.max() - 1) * 100
     if benchmark in r.index:
         for c in ("ret_1w", "ret_1m", "ret_3m", "ret_6m"):
