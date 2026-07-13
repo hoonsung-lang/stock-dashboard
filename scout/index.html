@@ -18,6 +18,8 @@ h3{font-size:13px;color:var(--sub);margin:14px 0 6px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;min-width:120px}
 .card .k{color:var(--sub);font-size:11px}.card .v{font-size:17px;font-weight:600;margin-top:2px}
 .card .d{font-size:11px;margin-top:2px}
+.card .asof{font-size:10px;color:var(--sub);margin-top:4px;opacity:.8}
+.asof-line{color:var(--sub);font-size:11px;margin:2px 0 8px}
 button{background:var(--btn);color:var(--txt);border:1px solid var(--line);border-radius:6px;
 padding:7px 14px;cursor:pointer;font-size:12px;font-family:inherit}
 button:hover{border-color:var(--acc)}
@@ -114,13 +116,14 @@ function sortTbl(id,i){
 
 function renderHeader(){
   const kr = DATA.kr_scan, us = DATA.us_scan, f = DATA.files||{};
+  const usAsof = us?.asof;
   let cards = "";
   (kr?.indices||[]).forEach(ix=>{
-    cards += `<div class="card"><div class="k">${esc(ix.code)}</div><div class="v">${fmt(ix.close,2)}</div><div class="d">${signed(ix.changeRate,2,"%")}</div></div>`;
+    cards += `<div class="card"><div class="k">${esc(ix.code)}</div><div class="v">${fmt(ix.close,2)}</div><div class="d">${signed(ix.changeRate,2,"%")}</div>${ix.date?`<div class="asof">${esc(ix.date)} 기준</div>`:""}</div>`;
   });
   ["SPY","QQQ","SMH"].forEach(t=>{
     const s = (us?.sector_etfs||[]).find(x=>x.ticker===t);
-    if(s) cards += `<div class="card"><div class="k">${t} ${esc(s.label)}</div><div class="v">${signed(s.ret_1m,1,"%")}<span style="font-size:11px;color:var(--sub)"> /1m</span></div><div class="d">3m ${signed(s.ret_3m,1,"%")}</div></div>`;
+    if(s) cards += `<div class="card"><div class="k">${t} ${esc(s.label)}</div><div class="v">${signed(s.ret_1m,1,"%")}<span style="font-size:11px;color:var(--sub)"> /1m</span></div><div class="d">3m ${signed(s.ret_3m,1,"%")}</div>${usAsof?`<div class="asof">${esc(usAsof)} 기준</div>`:""}</div>`;
   });
   $("#cards").innerHTML = cards;
   const now = new Date();
@@ -135,7 +138,8 @@ function renderHeader(){
 function renderKR(){
   const kr = DATA.kr_scan;
   if(!kr){ $("#kr").innerHTML = "<div class='summary'>kr_scan.json 없음 — [한국 스캔] 버튼으로 수집하세요.</div>"; return; }
-  let h = "";
+  const krAsof = (kr.indices||[]).find(ix=>ix.date)?.date;
+  let h = krAsof ? `<div class="asof-line">📅 데이터 기준일: <b>${esc(krAsof)}</b></div>` : "";
   const inds = (kr.industries_top||[]).slice(0,12), thms = (kr.themes_top||[]).slice(0,12);
   const mx = Math.max(...[...inds,...thms].map(g=>Math.abs(g.changeRate||0)),0.01);
   const gcols = nm => [
@@ -178,7 +182,7 @@ function renderKR(){
 function renderUS(){
   const us = DATA.us_scan;
   if(!us){ $("#us").innerHTML = "<div class='summary'>us_scan.json 없음 — [미국 스캔] 버튼으로 수집하세요.</div>"; return; }
-  let h = "";
+  let h = us.asof ? `<div class="asof-line">📅 데이터 기준일: <b>${esc(us.asof)}</b></div>` : "";
   const etfs = (us.sector_etfs||[]).filter(s=>s.ticker!=="SPY");
   const mx = Math.max(...etfs.map(s=>Math.abs(s.rs_3m||0)),0.01);
   h += "<h3>섹터/테마 ETF — S&P500 대비 상대강도</h3>";

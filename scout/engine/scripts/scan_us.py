@@ -20,6 +20,8 @@ def main():
 
     print("1/4 섹터/테마 ETF 상대강도 ...", flush=True)
     close, vol = us.download_prices(us.SECTOR_ETFS.keys(), period="1y")
+    # 데이터 기준일(마지막 거래일) — 수집시각(_generated)과 구분해 표시용
+    asof = str(close.index[-1].date()) if len(close.index) else None
     etf = us.perf_table(close, vol)
     etf["label"] = pd.Series(us.SECTOR_ETFS)
     etf = etf.sort_values("rs_3m", ascending=False)
@@ -60,6 +62,7 @@ def main():
         sector_count[s] = sector_count.get(s, 0) + 1
 
     save_json("us_scan", {
+        "asof": asof,
         "sector_etfs": sectors,
         "momentum_top": momentum_list,
         "momentum_sector_distribution": sorted(
