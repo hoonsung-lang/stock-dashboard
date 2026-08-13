@@ -1,149 +1,51 @@
 {
- "_generated": "2026-08-12 23:03:12",
+ "_generated": "2026-08-13 23:04:36",
  "indices": [
   {
    "code": "KOSPI",
-   "close": 6579.04,
-   "change": 233.51,
-   "changeRate": 3.68,
-   "chg_1m_pct": -3.35,
-   "date": "2026-08-12"
+   "close": 6813.34,
+   "change": 0.0,
+   "changeRate": 0.0,
+   "chg_1m_pct": -0.63,
+   "date": "2026-08-14"
   },
   {
    "code": "KOSDAQ",
-   "close": 858.91,
-   "change": 1.07,
-   "changeRate": 0.12,
-   "chg_1m_pct": 7.45,
-   "date": "2026-08-12"
+   "close": 861.37,
+   "change": 0.0,
+   "changeRate": 0.0,
+   "chg_1m_pct": 9.87,
+   "date": "2026-08-14"
   }
  ],
  "industries_top": [
   {
-   "no": 307,
-   "name": "전자제품",
+   "no": 309,
+   "name": "음료",
    "changeRate": 0.0,
    "riseCount": 0,
    "fallCount": 0,
    "totalCount": 0
   },
   {
-   "no": 308,
-   "name": "인터넷과카탈로그소매",
+   "no": 318,
+   "name": "종이와목재",
    "changeRate": 0.0,
    "riseCount": 0,
    "fallCount": 0,
    "totalCount": 0
   },
   {
-   "no": 278,
-   "name": "반도체와반도체장비",
+   "no": 317,
+   "name": "호텔,레스토랑,레저",
    "changeRate": 0.0,
    "riseCount": 0,
    "fallCount": 0,
    "totalCount": 0
   },
   {
-   "no": 282,
-   "name": "전자장비와기기",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
-  },
-  {
-   "no": 284,
-   "name": "우주항공과국방",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
-  },
-  {
-   "no": 330,
-   "name": "생명보험",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
-  },
-  {
-   "no": 266,
-   "name": "화장품",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
-  },
-  {
-   "no": 306,
-   "name": "전기장비",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
-  },
-  {
-   "no": 276,
-   "name": "복합기업",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
-  },
-  {
-   "no": 292,
-   "name": "핸드셋",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
-  },
-  {
-   "no": 283,
-   "name": "전기제품",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
-  },
-  {
-   "no": 311,
-   "name": "포장재",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
-  },
-  {
-   "no": 338,
-   "name": "사무용전자제품",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
-  },
-  {
-   "no": 299,
-   "name": "기계",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
-  },
-  {
-   "no": 313,
-   "name": "석유와가스",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
-  }
- ],
- "industries_bottom": [
-  {
-   "no": 274,
-   "name": "섬유,의류,신발,호화품",
+   "no": 316,
+   "name": "건강관리업체및서비스",
    "changeRate": 0.0,
    "riseCount": 0,
    "fallCount": 0,
@@ -158,8 +60,154 @@
    "totalCount": 0
   },
   {
-   "no": 298,
-   "name": "가정용기기와용품",
+   "no": 314,
+   "name": "출판",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  },
+  {
+   "no": 313,
+   "name": "석유와가스",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  },
+  {
+   "no": 312,
+   "name": "가스유틸리티",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  },
+  {
+   "no": 311,
+   "name": "포장재",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  },
+  {
+   "no": 310,
+   "name": "광고",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  },
+  {
+   "no": 319,
+   "name": "기타금융",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  },
+  {
+   "no": 308,
+   "name": "인터넷과카탈로그소매",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  },
+  {
+   "no": 307,
+   "name": "전자제품",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  },
+  {
+   "no": 306,
+   "name": "전기장비",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  },
+  {
+   "no": 305,
+   "name": "항공사",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  }
+ ],
+ "industries_bottom": [
+  {
+   "no": 290,
+   "name": "교육서비스",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  },
+  {
+   "no": 25,
+   "name": "기타",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  },
+  {
+   "no": 288,
+   "name": "건강관리기술",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  },
+  {
+   "no": 287,
+   "name": "소프트웨어",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  },
+  {
+   "no": 286,
+   "name": "생물공학",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  },
+  {
+   "no": 285,
+   "name": "방송과엔터테인먼트",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  },
+  {
+   "no": 284,
+   "name": "우주항공과국방",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  },
+  {
+   "no": 283,
+   "name": "전기제품",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  },
+  {
+   "no": 282,
+   "name": "전자장비와기기",
    "changeRate": 0.0,
    "riseCount": 0,
    "fallCount": 0,
@@ -172,132 +220,116 @@
    "riseCount": 0,
    "fallCount": 0,
    "totalCount": 0
-  },
-  {
-   "no": 303,
-   "name": "가구",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
-  },
-  {
-   "no": 264,
-   "name": "백화점과일반상점",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
-  },
-  {
-   "no": 261,
-   "name": "제약",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
-  },
-  {
-   "no": 332,
-   "name": "문구류",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
-  },
-  {
-   "no": 263,
-   "name": "게임엔터테인먼트",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
-  },
-  {
-   "no": 262,
-   "name": "생명과학도구및서비스",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
   }
  ],
  "themes_top": [
   {
-   "no": 178,
-   "name": "전선",
+   "no": 8,
+   "name": "화폐/금융자동화기기(디지털화폐 등)",
    "changeRate": 0.0,
    "riseCount": 0,
    "fallCount": 0,
    "totalCount": 0
   },
   {
-   "no": 614,
-   "name": "S7(삼성전자/SK하이닉스 등)",
+   "no": 9,
+   "name": "OLED(유기 발광 다이오드)",
    "changeRate": 0.0,
    "riseCount": 0,
    "fallCount": 0,
    "totalCount": 0
   },
   {
-   "no": 173,
-   "name": "IT 대표주",
+   "no": 12,
+   "name": "반도체 장비",
    "changeRate": 0.0,
    "riseCount": 0,
    "fallCount": 0,
    "totalCount": 0
   },
   {
-   "no": 155,
-   "name": "반도체 대표주(생산)",
+   "no": 13,
+   "name": "리모델링/인테리어",
    "changeRate": 0.0,
    "riseCount": 0,
    "fallCount": 0,
    "totalCount": 0
   },
   {
-   "no": 269,
-   "name": "LED장비",
+   "no": 14,
+   "name": "반도체 재료/부품",
    "changeRate": 0.0,
    "riseCount": 0,
    "fallCount": 0,
    "totalCount": 0
   },
   {
-   "no": 556,
-   "name": "뉴로모픽 반도체",
+   "no": 16,
+   "name": "구제역/광우병 수혜",
    "changeRate": 0.0,
    "riseCount": 0,
    "fallCount": 0,
    "totalCount": 0
   },
   {
-   "no": 228,
-   "name": "국내 상장 중국기업",
+   "no": 17,
+   "name": "SI(시스템통합)",
    "changeRate": 0.0,
    "riseCount": 0,
    "fallCount": 0,
    "totalCount": 0
   },
   {
-   "no": 608,
-   "name": "반도체 기판(FC-BGA/PCB/MLB 등)",
+   "no": 18,
+   "name": "전자파",
    "changeRate": 0.0,
    "riseCount": 0,
    "fallCount": 0,
    "totalCount": 0
   },
   {
-   "no": 322,
-   "name": "건설 중소형",
+   "no": 19,
+   "name": "황사/미세먼지",
    "changeRate": 0.0,
    "riseCount": 0,
    "fallCount": 0,
    "totalCount": 0
   },
   {
-   "no": 405,
-   "name": "MLCC(적층세라믹콘덴서)",
+   "no": 27,
+   "name": "자동차부품",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  },
+  {
+   "no": 28,
+   "name": "CCTV＆DVR",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  },
+  {
+   "no": 30,
+   "name": "조선",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  },
+  {
+   "no": 31,
+   "name": "환율하락 수혜",
+   "changeRate": 0.0,
+   "riseCount": 0,
+   "fallCount": 0,
+   "totalCount": 0
+  },
+  {
+   "no": 32,
+   "name": "패션/의류",
    "changeRate": 0.0,
    "riseCount": 0,
    "fallCount": 0,
@@ -312,72 +344,40 @@
    "totalCount": 0
   },
   {
-   "no": 321,
-   "name": "무선충전기술",
+   "no": 36,
+   "name": "해운",
    "changeRate": 0.0,
    "riseCount": 0,
    "fallCount": 0,
    "totalCount": 0
   },
   {
-   "no": 547,
-   "name": "CXL(컴퓨트익스프레스링크)",
+   "no": 38,
+   "name": "홈쇼핑",
    "changeRate": 0.0,
    "riseCount": 0,
    "fallCount": 0,
    "totalCount": 0
   },
   {
-   "no": 390,
-   "name": "마이크로 LED",
+   "no": 41,
+   "name": "카메라모듈/부품",
    "changeRate": 0.0,
    "riseCount": 0,
    "fallCount": 0,
    "totalCount": 0
   },
   {
-   "no": 110,
-   "name": "화장품",
+   "no": 42,
+   "name": "게임",
    "changeRate": 0.0,
    "riseCount": 0,
    "fallCount": 0,
    "totalCount": 0
   },
   {
-   "no": 536,
-   "name": "HBM(고대역폭메모리)",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
-  },
-  {
-   "no": 123,
-   "name": "전력설비",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
-  },
-  {
-   "no": 564,
-   "name": "전기차 화재 방지(배터리 열폭주 등)",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
-  },
-  {
-   "no": 557,
-   "name": "유리 기판",
-   "changeRate": 0.0,
-   "riseCount": 0,
-   "fallCount": 0,
-   "totalCount": 0
-  },
-  {
-   "no": 545,
-   "name": "온디바이스 AI",
+   "no": 44,
+   "name": "시멘트/레미콘",
    "changeRate": 0.0,
    "riseCount": 0,
    "fallCount": 0,
@@ -389,161 +389,161 @@
    {
     "code": "005930",
     "name": "삼성전자",
-    "quantity_K": 2463.0,
-    "amount_M": 584285.0,
-    "volume": 23310969.0,
+    "quantity_K": 5802.0,
+    "amount_M": 1477545.0,
+    "volume": 27102479.0,
+    "is_etf": false
+   },
+   {
+    "code": "000660",
+    "name": "SK하이닉스",
+    "quantity_K": 560.0,
+    "amount_M": 845069.0,
+    "volume": 4566672.0,
+    "is_etf": false
+   },
+   {
+    "code": "009150",
+    "name": "삼성전기",
+    "quantity_K": 132.0,
+    "amount_M": 174751.0,
+    "volume": 701750.0,
+    "is_etf": false
+   },
+   {
+    "code": "066570",
+    "name": "LG전자",
+    "quantity_K": 572.0,
+    "amount_M": 114337.0,
+    "volume": 3086187.0,
     "is_etf": false
    },
    {
     "code": "402340",
     "name": "SK스퀘어",
-    "quantity_K": 69.0,
-    "amount_M": 64479.0,
-    "volume": 494514.0,
+    "quantity_K": 98.0,
+    "amount_M": 98842.0,
+    "volume": 708475.0,
     "is_etf": false
    },
    {
-    "code": "068270",
-    "name": "셀트리온",
-    "quantity_K": 303.0,
-    "amount_M": 63366.0,
-    "volume": 886325.0,
-    "is_etf": false
-   },
-   {
-    "code": "122630",
-    "name": "KODEX 레버리지",
-    "quantity_K": 200.0,
-    "amount_M": 18160.0,
-    "volume": 16799016.0,
+    "code": "069500",
+    "name": "KODEX 200",
+    "quantity_K": 367.0,
+    "amount_M": 37997.0,
+    "volume": 15084783.0,
     "is_etf": true
    },
    {
-    "code": "207940",
-    "name": "삼성바이오로직스",
-    "quantity_K": 11.0,
-    "amount_M": 17993.0,
-    "volume": 69856.0,
+    "code": "005380",
+    "name": "현대차",
+    "quantity_K": 91.0,
+    "amount_M": 37084.0,
+    "volume": 411565.0,
     "is_etf": false
    },
    {
     "code": "133690",
     "name": "TIGER 미국나스닥100",
-    "quantity_K": 96.0,
-    "amount_M": 17890.0,
-    "volume": 2037776.0,
+    "quantity_K": 196.0,
+    "amount_M": 36317.0,
+    "volume": 1961242.0,
     "is_etf": true
    },
    {
-    "code": "034730",
-    "name": "SK",
-    "quantity_K": 31.0,
-    "amount_M": 15990.0,
-    "volume": 116923.0,
+    "code": "042660",
+    "name": "한화오션",
+    "quantity_K": 287.0,
+    "amount_M": 25831.0,
+    "volume": 1138579.0,
     "is_etf": false
    },
    {
-    "code": "035720",
-    "name": "카카오",
-    "quantity_K": 387.0,
-    "amount_M": 15723.0,
-    "volume": 2642980.0,
-    "is_etf": false
+    "code": "122630",
+    "name": "KODEX 레버리지",
+    "quantity_K": 276.0,
+    "amount_M": 25692.0,
+    "volume": 20595774.0,
+    "is_etf": true
    },
    {
-    "code": "329180",
-    "name": "HD현대중공업",
-    "quantity_K": 26.0,
-    "amount_M": 13298.0,
-    "volume": 248198.0,
-    "is_etf": false
-   },
-   {
-    "code": "316140",
-    "name": "우리금융지주",
-    "quantity_K": 348.0,
-    "amount_M": 11891.0,
-    "volume": 2109085.0,
-    "is_etf": false
-   },
-   {
-    "code": "090430",
-    "name": "아모레퍼시픽",
-    "quantity_K": 84.0,
-    "amount_M": 11630.0,
-    "volume": 365683.0,
-    "is_etf": false
-   },
-   {
-    "code": "180640",
-    "name": "한진칼",
-    "quantity_K": 97.0,
-    "amount_M": 11164.0,
-    "volume": 155972.0,
-    "is_etf": false
-   },
-   {
-    "code": "011780",
-    "name": "금호석유화학",
-    "quantity_K": 87.0,
-    "amount_M": 11102.0,
-    "volume": 132325.0,
+    "code": "192820",
+    "name": "코스맥스",
+    "quantity_K": 101.0,
+    "amount_M": 24765.0,
+    "volume": 604965.0,
     "is_etf": false
    },
    {
     "code": "012330",
     "name": "현대모비스",
-    "quantity_K": 22.0,
-    "amount_M": 10948.0,
-    "volume": 157950.0,
+    "quantity_K": 49.0,
+    "amount_M": 24756.0,
+    "volume": 263323.0,
     "is_etf": false
    },
    {
-    "code": "042700",
-    "name": "한미반도체",
-    "quantity_K": 52.0,
-    "amount_M": 10812.0,
-    "volume": 416434.0,
+    "code": "267260",
+    "name": "HD현대일렉트릭",
+    "quantity_K": 29.0,
+    "amount_M": 22895.0,
+    "volume": 109295.0,
     "is_etf": false
    },
    {
-    "code": "009540",
-    "name": "HD한국조선해양",
-    "quantity_K": 26.0,
-    "amount_M": 10432.0,
-    "volume": 142351.0,
+    "code": "010120",
+    "name": "LS ELECTRIC",
+    "quantity_K": 89.0,
+    "amount_M": 18543.0,
+    "volume": 491635.0,
     "is_etf": false
    },
    {
-    "code": "251340",
-    "name": "KODEX 코스닥150선물인버스",
-    "quantity_K": 4399.0,
-    "amount_M": 10267.0,
-    "volume": 102171932.0,
-    "is_etf": true
-   },
-   {
-    "code": "012450",
-    "name": "한화에어로스페이스",
-    "quantity_K": 10.0,
-    "amount_M": 10219.0,
-    "volume": 158144.0,
+    "code": "000270",
+    "name": "기아",
+    "quantity_K": 135.0,
+    "amount_M": 18418.0,
+    "volume": 851047.0,
     "is_etf": false
    },
    {
-    "code": "086280",
-    "name": "현대글로비스",
-    "quantity_K": 50.0,
-    "amount_M": 10149.0,
-    "volume": 126588.0,
+    "code": "298040",
+    "name": "효성중공업",
+    "quantity_K": 6.0,
+    "amount_M": 18228.0,
+    "volume": 26755.0,
     "is_etf": false
    },
    {
-    "code": "011070",
-    "name": "LG이노텍",
-    "quantity_K": 18.0,
-    "amount_M": 9838.0,
-    "volume": 198952.0,
+    "code": "278470",
+    "name": "에이피알",
+    "quantity_K": 41.0,
+    "amount_M": 16477.0,
+    "volume": 392355.0,
+    "is_etf": false
+   },
+   {
+    "code": "475150",
+    "name": "SK이터닉스",
+    "quantity_K": 303.0,
+    "amount_M": 15861.0,
+    "volume": 2902182.0,
+    "is_etf": false
+   },
+   {
+    "code": "006340",
+    "name": "대원전선",
+    "quantity_K": 964.0,
+    "amount_M": 15055.0,
+    "volume": 27661642.0,
+    "is_etf": false
+   },
+   {
+    "code": "000150",
+    "name": "두산",
+    "quantity_K": 12.0,
+    "amount_M": 14950.0,
+    "volume": 53516.0,
     "is_etf": false
    }
   ],
@@ -551,594 +551,754 @@
    {
     "code": "000660",
     "name": "SK하이닉스",
-    "quantity_K": 68.0,
-    "amount_M": 103535.0,
-    "volume": 3817655.0,
+    "quantity_K": 194.0,
+    "amount_M": 288792.0,
+    "volume": 4566672.0,
     "is_etf": false
    },
    {
     "code": "005930",
     "name": "삼성전자",
-    "quantity_K": 319.0,
-    "amount_M": 76298.0,
-    "volume": 23310969.0,
-    "is_etf": false
-   },
-   {
-    "code": "005935",
-    "name": "삼성전자우",
-    "quantity_K": 211.0,
-    "amount_M": 37729.0,
-    "volume": 2503607.0,
-    "is_etf": false
-   },
-   {
-    "code": "009830",
-    "name": "한화솔루션",
-    "quantity_K": 892.0,
-    "amount_M": 32459.0,
-    "volume": 9165523.0,
+    "quantity_K": 777.0,
+    "amount_M": 196181.0,
+    "volume": 27102479.0,
     "is_etf": false
    },
    {
     "code": "122630",
     "name": "KODEX 레버리지",
-    "quantity_K": 279.0,
-    "amount_M": 26748.0,
-    "volume": 16799016.0,
+    "quantity_K": 1297.0,
+    "amount_M": 128865.0,
+    "volume": 20595774.0,
     "is_etf": true
    },
    {
-    "code": "018260",
-    "name": "삼성에스디에스",
-    "quantity_K": 112.0,
-    "amount_M": 26494.0,
-    "volume": 412978.0,
-    "is_etf": false
-   },
-   {
-    "code": "207940",
-    "name": "삼성바이오로직스",
-    "quantity_K": 16.0,
-    "amount_M": 26349.0,
-    "volume": 69856.0,
-    "is_etf": false
-   },
-   {
-    "code": "233740",
-    "name": "KODEX 코스닥150레버리지",
-    "quantity_K": 3330.0,
-    "amount_M": 25790.0,
-    "volume": 167101063.0,
-    "is_etf": true
-   },
-   {
-    "code": "010950",
-    "name": "S-Oil",
-    "quantity_K": 138.0,
-    "amount_M": 20398.0,
-    "volume": 403760.0,
-    "is_etf": false
-   },
-   {
-    "code": "0193W0",
-    "name": "KODEX 삼성전자단일종목레버리지",
-    "quantity_K": 1769.0,
-    "amount_M": 18510.0,
-    "volume": 13631683.0,
-    "is_etf": true
-   },
-   {
-    "code": "006360",
-    "name": "GS건설",
-    "quantity_K": 503.0,
-    "amount_M": 17615.0,
-    "volume": 3927125.0,
-    "is_etf": false
-   },
-   {
-    "code": "096770",
-    "name": "SK이노베이션",
-    "quantity_K": 129.0,
-    "amount_M": 16384.0,
-    "volume": 758130.0,
+    "code": "009150",
+    "name": "삼성전기",
+    "quantity_K": 82.0,
+    "amount_M": 108673.0,
+    "volume": 701750.0,
     "is_etf": false
    },
    {
     "code": "069500",
     "name": "KODEX 200",
-    "quantity_K": 157.0,
-    "amount_M": 15908.0,
-    "volume": 14065397.0,
+    "quantity_K": 842.0,
+    "amount_M": 86958.0,
+    "volume": 15084783.0,
     "is_etf": true
-   },
-   {
-    "code": "000720",
-    "name": "현대건설",
-    "quantity_K": 134.0,
-    "amount_M": 15195.0,
-    "volume": 608973.0,
-    "is_etf": false
-   },
-   {
-    "code": "373220",
-    "name": "LG에너지솔루션",
-    "quantity_K": 38.0,
-    "amount_M": 14050.0,
-    "volume": 279255.0,
-    "is_etf": false
-   },
-   {
-    "code": "000810",
-    "name": "삼성화재",
-    "quantity_K": 18.0,
-    "amount_M": 11851.0,
-    "volume": 86934.0,
-    "is_etf": false
-   },
-   {
-    "code": "035420",
-    "name": "NAVER",
-    "quantity_K": 55.0,
-    "amount_M": 11841.0,
-    "volume": 649296.0,
-    "is_etf": false
-   },
-   {
-    "code": "010130",
-    "name": "고려아연",
-    "quantity_K": 9.0,
-    "amount_M": 11743.0,
-    "volume": 47087.0,
-    "is_etf": false
-   },
-   {
-    "code": "068270",
-    "name": "셀트리온",
-    "quantity_K": 55.0,
-    "amount_M": 11572.0,
-    "volume": 886325.0,
-    "is_etf": false
-   },
-   {
-    "code": "000100",
-    "name": "유한양행",
-    "quantity_K": 130.0,
-    "amount_M": 11235.0,
-    "volume": 502391.0,
-    "is_etf": false
-   }
-  ],
-  "foreign_sell": [
-   {
-    "code": "000660",
-    "name": "SK하이닉스",
-    "quantity_K": -211.0,
-    "amount_M": -299781.0,
-    "volume": 3817655.0,
-    "is_etf": false
-   },
-   {
-    "code": "009150",
-    "name": "삼성전기",
-    "quantity_K": -40.0,
-    "amount_M": -47202.0,
-    "volume": 724733.0,
-    "is_etf": false
    },
    {
     "code": "066570",
     "name": "LG전자",
-    "quantity_K": -231.0,
-    "amount_M": -42388.0,
-    "volume": 800188.0,
-    "is_etf": false
-   },
-   {
-    "code": "001820",
-    "name": "삼화콘덴서",
-    "quantity_K": -398.0,
-    "amount_M": -34683.0,
-    "volume": 2339274.0,
-    "is_etf": false
-   },
-   {
-    "code": "105560",
-    "name": "KB금융",
-    "quantity_K": -202.0,
-    "amount_M": -33988.0,
-    "volume": 1039635.0,
-    "is_etf": false
-   },
-   {
-    "code": "006400",
-    "name": "삼성SDI",
-    "quantity_K": -64.0,
-    "amount_M": -29918.0,
-    "volume": 354160.0,
-    "is_etf": false
-   },
-   {
-    "code": "042660",
-    "name": "한화오션",
-    "quantity_K": -293.0,
-    "amount_M": -26439.0,
-    "volume": 1254247.0,
-    "is_etf": false
-   },
-   {
-    "code": "097950",
-    "name": "CJ제일제당",
-    "quantity_K": -138.0,
-    "amount_M": -26147.0,
-    "volume": 271724.0,
-    "is_etf": false
-   },
-   {
-    "code": "034020",
-    "name": "두산에너빌리티",
-    "quantity_K": -309.0,
-    "amount_M": -24100.0,
-    "volume": 1423064.0,
-    "is_etf": false
-   },
-   {
-    "code": "047810",
-    "name": "한국항공우주",
-    "quantity_K": -168.0,
-    "amount_M": -23325.0,
-    "volume": 656056.0,
-    "is_etf": false
-   },
-   {
-    "code": "010130",
-    "name": "고려아연",
-    "quantity_K": -17.0,
-    "amount_M": -21637.0,
-    "volume": 47087.0,
-    "is_etf": false
-   },
-   {
-    "code": "090460",
-    "name": "비에이치",
-    "quantity_K": -1119.0,
-    "amount_M": -19379.0,
-    "volume": 4596562.0,
-    "is_etf": false
-   },
-   {
-    "code": "475150",
-    "name": "SK이터닉스",
-    "quantity_K": -356.0,
-    "amount_M": -18508.0,
-    "volume": 3227683.0,
-    "is_etf": false
-   },
-   {
-    "code": "000720",
-    "name": "현대건설",
-    "quantity_K": -156.0,
-    "amount_M": -17669.0,
-    "volume": 608973.0,
-    "is_etf": false
-   },
-   {
-    "code": "007660",
-    "name": "이수페타시스",
-    "quantity_K": -185.0,
-    "amount_M": -16345.0,
-    "volume": 592325.0,
-    "is_etf": false
-   },
-   {
-    "code": "066970",
-    "name": "엘앤에프",
-    "quantity_K": -138.0,
-    "amount_M": -13873.0,
-    "volume": 480152.0,
-    "is_etf": false
-   },
-   {
-    "code": "373220",
-    "name": "LG에너지솔루션",
-    "quantity_K": -38.0,
-    "amount_M": -13772.0,
-    "volume": 279255.0,
-    "is_etf": false
-   },
-   {
-    "code": "010950",
-    "name": "S-Oil",
-    "quantity_K": -84.0,
-    "amount_M": -12411.0,
-    "volume": 403760.0,
+    "quantity_K": 346.0,
+    "amount_M": 69882.0,
+    "volume": 3086187.0,
     "is_etf": false
    },
    {
     "code": "0193T0",
     "name": "KODEX SK하이닉스단일종목레버리지",
-    "quantity_K": -1663.0,
-    "amount_M": -11758.0,
-    "volume": 35465800.0,
+    "quantity_K": 7333.0,
+    "amount_M": 60583.0,
+    "volume": 35528536.0,
     "is_etf": true
    },
    {
-    "code": "006360",
-    "name": "GS건설",
-    "quantity_K": -317.0,
-    "amount_M": -11134.0,
-    "volume": 3927125.0,
+    "code": "402340",
+    "name": "SK스퀘어",
+    "quantity_K": 58.0,
+    "amount_M": 59192.0,
+    "volume": 708475.0,
     "is_etf": false
+   },
+   {
+    "code": "011070",
+    "name": "LG이노텍",
+    "quantity_K": 65.0,
+    "amount_M": 38804.0,
+    "volume": 307839.0,
+    "is_etf": false
+   },
+   {
+    "code": "006400",
+    "name": "삼성SDI",
+    "quantity_K": 77.0,
+    "amount_M": 37410.0,
+    "volume": 479152.0,
+    "is_etf": false
+   },
+   {
+    "code": "161890",
+    "name": "한국콜마",
+    "quantity_K": 199.0,
+    "amount_M": 25832.0,
+    "volume": 2512264.0,
+    "is_etf": false
+   },
+   {
+    "code": "005935",
+    "name": "삼성전자우",
+    "quantity_K": 123.0,
+    "amount_M": 23076.0,
+    "volume": 3165472.0,
+    "is_etf": false
+   },
+   {
+    "code": "064400",
+    "name": "LG씨엔에스",
+    "quantity_K": 294.0,
+    "amount_M": 22911.0,
+    "volume": 1682681.0,
+    "is_etf": false
+   },
+   {
+    "code": "034020",
+    "name": "두산에너빌리티",
+    "quantity_K": 251.0,
+    "amount_M": 20240.0,
+    "volume": 2082680.0,
+    "is_etf": false
+   },
+   {
+    "code": "233740",
+    "name": "KODEX 코스닥150레버리지",
+    "quantity_K": 2196.0,
+    "amount_M": 17419.0,
+    "volume": 99825646.0,
+    "is_etf": true
+   },
+   {
+    "code": "472150",
+    "name": "TIGER 배당커버드콜액티브",
+    "quantity_K": 876.0,
+    "amount_M": 17146.0,
+    "volume": 3428459.0,
+    "is_etf": true
+   },
+   {
+    "code": "373220",
+    "name": "LG에너지솔루션",
+    "quantity_K": 47.0,
+    "amount_M": 17007.0,
+    "volume": 257478.0,
+    "is_etf": false
+   },
+   {
+    "code": "0193W0",
+    "name": "KODEX 삼성전자단일종목레버리지",
+    "quantity_K": 1406.0,
+    "amount_M": 16484.0,
+    "volume": 11608722.0,
+    "is_etf": true
+   },
+   {
+    "code": "494310",
+    "name": "KODEX 반도체레버리지",
+    "quantity_K": 232.0,
+    "amount_M": 15740.0,
+    "volume": 5197983.0,
+    "is_etf": true
+   },
+   {
+    "code": "047810",
+    "name": "한국항공우주",
+    "quantity_K": 97.0,
+    "amount_M": 13649.0,
+    "volume": 435234.0,
+    "is_etf": false
+   }
+  ],
+  "foreign_sell": [
+   {
+    "code": "005935",
+    "name": "삼성전자우",
+    "quantity_K": -280.0,
+    "amount_M": -51822.0,
+    "volume": 3165472.0,
+    "is_etf": false
+   },
+   {
+    "code": "161890",
+    "name": "한국콜마",
+    "quantity_K": -249.0,
+    "amount_M": -32112.0,
+    "volume": 2512264.0,
+    "is_etf": false
+   },
+   {
+    "code": "004170",
+    "name": "신세계",
+    "quantity_K": -53.0,
+    "amount_M": -21168.0,
+    "volume": 184454.0,
+    "is_etf": false
+   },
+   {
+    "code": "090460",
+    "name": "비에이치",
+    "quantity_K": -1065.0,
+    "amount_M": -19686.0,
+    "volume": 2452203.0,
+    "is_etf": false
+   },
+   {
+    "code": "012450",
+    "name": "한화에어로스페이스",
+    "quantity_K": -16.0,
+    "amount_M": -19499.0,
+    "volume": 300729.0,
+    "is_etf": false
+   },
+   {
+    "code": "064400",
+    "name": "LG씨엔에스",
+    "quantity_K": -241.0,
+    "amount_M": -18636.0,
+    "volume": 1682681.0,
+    "is_etf": false
+   },
+   {
+    "code": "009450",
+    "name": "경동나비엔",
+    "quantity_K": -244.0,
+    "amount_M": -16386.0,
+    "volume": 458701.0,
+    "is_etf": false
+   },
+   {
+    "code": "035720",
+    "name": "카카오",
+    "quantity_K": -372.0,
+    "amount_M": -14952.0,
+    "volume": 2365015.0,
+    "is_etf": false
+   },
+   {
+    "code": "078930",
+    "name": "GS",
+    "quantity_K": -134.0,
+    "amount_M": -13454.0,
+    "volume": 827960.0,
+    "is_etf": false
+   },
+   {
+    "code": "017670",
+    "name": "SK텔레콤",
+    "quantity_K": -131.0,
+    "amount_M": -11674.0,
+    "volume": 1324631.0,
+    "is_etf": false
+   },
+   {
+    "code": "088980",
+    "name": "맥쿼리인프라",
+    "quantity_K": -1064.0,
+    "amount_M": -10539.0,
+    "volume": 1921921.0,
+    "is_etf": false
+   },
+   {
+    "code": "0193W0",
+    "name": "KODEX 삼성전자단일종목레버리지",
+    "quantity_K": -881.0,
+    "amount_M": -10002.0,
+    "volume": 11608722.0,
+    "is_etf": true
+   },
+   {
+    "code": "000990",
+    "name": "DB하이텍",
+    "quantity_K": -104.0,
+    "amount_M": -9899.0,
+    "volume": 292264.0,
+    "is_etf": false
+   },
+   {
+    "code": "066970",
+    "name": "엘앤에프",
+    "quantity_K": -88.0,
+    "amount_M": -8767.0,
+    "volume": 405396.0,
+    "is_etf": false
+   },
+   {
+    "code": "007810",
+    "name": "코리아써키트",
+    "quantity_K": -132.0,
+    "amount_M": -8168.0,
+    "volume": 412108.0,
+    "is_etf": false
+   },
+   {
+    "code": "000100",
+    "name": "유한양행",
+    "quantity_K": -97.0,
+    "amount_M": -8125.0,
+    "volume": 320018.0,
+    "is_etf": false
+   },
+   {
+    "code": "006260",
+    "name": "LS",
+    "quantity_K": -24.0,
+    "amount_M": -7978.0,
+    "volume": 148023.0,
+    "is_etf": false
+   },
+   {
+    "code": "373220",
+    "name": "LG에너지솔루션",
+    "quantity_K": -21.0,
+    "amount_M": -7769.0,
+    "volume": 257478.0,
+    "is_etf": false
+   },
+   {
+    "code": "097950",
+    "name": "CJ제일제당",
+    "quantity_K": -40.0,
+    "amount_M": -7503.0,
+    "volume": 82306.0,
+    "is_etf": false
+   },
+   {
+    "code": "252670",
+    "name": "KODEX 200선물인버스2X",
+    "quantity_K": -70955.0,
+    "amount_M": -7407.0,
+    "volume": 6987268237.0,
+    "is_etf": true
    }
   ],
   "organ_sell": [
    {
-    "code": "402340",
-    "name": "SK스퀘어",
-    "quantity_K": -81.0,
-    "amount_M": -75589.0,
-    "volume": 494514.0,
-    "is_etf": false
-   },
-   {
-    "code": "042660",
-    "name": "한화오션",
-    "quantity_K": -375.0,
-    "amount_M": -33702.0,
-    "volume": 1254247.0,
-    "is_etf": false
+    "code": "252670",
+    "name": "KODEX 200선물인버스2X",
+    "quantity_K": -612259.0,
+    "amount_M": -53377.0,
+    "volume": 6987268237.0,
+    "is_etf": true
    },
    {
     "code": "133690",
     "name": "TIGER 미국나스닥100",
-    "quantity_K": -173.0,
-    "amount_M": -32100.0,
-    "volume": 2037776.0,
+    "quantity_K": -254.0,
+    "amount_M": -47039.0,
+    "volume": 1961242.0,
+    "is_etf": true
+   },
+   {
+    "code": "114800",
+    "name": "KODEX 인버스",
+    "quantity_K": -39295.0,
+    "amount_M": -43027.0,
+    "volume": 865509460.0,
     "is_etf": true
    },
    {
     "code": "003230",
     "name": "삼양식품",
-    "quantity_K": -22.0,
-    "amount_M": -27117.0,
-    "volume": 50563.0,
+    "quantity_K": -33.0,
+    "amount_M": -39792.0,
+    "volume": 84799.0,
+    "is_etf": false
+   },
+   {
+    "code": "068270",
+    "name": "셀트리온",
+    "quantity_K": -164.0,
+    "amount_M": -33159.0,
+    "volume": 926438.0,
+    "is_etf": false
+   },
+   {
+    "code": "329180",
+    "name": "HD현대중공업",
+    "quantity_K": -57.0,
+    "amount_M": -28204.0,
+    "volume": 268993.0,
+    "is_etf": false
+   },
+   {
+    "code": "360750",
+    "name": "TIGER 미국S&P500",
+    "quantity_K": -906.0,
+    "amount_M": -24571.0,
+    "volume": 23437266.0,
+    "is_etf": true
+   },
+   {
+    "code": "207940",
+    "name": "삼성바이오로직스",
+    "quantity_K": -15.0,
+    "amount_M": -23333.0,
+    "volume": 69313.0,
+    "is_etf": false
+   },
+   {
+    "code": "009540",
+    "name": "HD한국조선해양",
+    "quantity_K": -59.0,
+    "amount_M": -22610.0,
+    "volume": 223025.0,
     "is_etf": false
    },
    {
     "code": "498400",
     "name": "KODEX 200타겟위클리커버드콜",
-    "quantity_K": -1385.0,
-    "amount_M": -26261.0,
-    "volume": 6603046.0,
+    "quantity_K": -1127.0,
+    "amount_M": -22349.0,
+    "volume": 8280126.0,
     "is_etf": true
-   },
-   {
-    "code": "360750",
-    "name": "TIGER 미국S&P500",
-    "quantity_K": -933.0,
-    "amount_M": -25389.0,
-    "volume": 17347788.0,
-    "is_etf": true
-   },
-   {
-    "code": "329180",
-    "name": "HD현대중공업",
-    "quantity_K": -49.0,
-    "amount_M": -24727.0,
-    "volume": 248198.0,
-    "is_etf": false
-   },
-   {
-    "code": "379810",
-    "name": "KODEX 미국나스닥100",
-    "quantity_K": -849.0,
-    "amount_M": -23581.0,
-    "volume": 10200109.0,
-    "is_etf": true
-   },
-   {
-    "code": "012450",
-    "name": "한화에어로스페이스",
-    "quantity_K": -22.0,
-    "amount_M": -23513.0,
-    "volume": 158144.0,
-    "is_etf": false
-   },
-   {
-    "code": "009150",
-    "name": "삼성전기",
-    "quantity_K": -17.0,
-    "amount_M": -20096.0,
-    "volume": 724733.0,
-    "is_etf": false
-   },
-   {
-    "code": "000150",
-    "name": "두산",
-    "quantity_K": -17.0,
-    "amount_M": -20086.0,
-    "volume": 52202.0,
-    "is_etf": false
-   },
-   {
-    "code": "047810",
-    "name": "한국항공우주",
-    "quantity_K": -135.0,
-    "amount_M": -18859.0,
-    "volume": 656056.0,
-    "is_etf": false
    },
    {
     "code": "005380",
     "name": "현대차",
-    "quantity_K": -47.0,
-    "amount_M": -18769.0,
-    "volume": 327064.0,
+    "quantity_K": -52.0,
+    "amount_M": -21420.0,
+    "volume": 411565.0,
     "is_etf": false
    },
    {
-    "code": "352820",
-    "name": "하이브",
-    "quantity_K": -99.0,
-    "amount_M": -17799.0,
-    "volume": 232167.0,
-    "is_etf": false
-   },
-   {
-    "code": "0197X0",
-    "name": "SOL SK하이닉스선물단일종목인버스2X",
-    "quantity_K": -1381.0,
-    "amount_M": -16020.0,
-    "volume": 15343403.0,
+    "code": "488080",
+    "name": "TIGER 반도체TOP10레버리지",
+    "quantity_K": -601.0,
+    "amount_M": -18097.0,
+    "volume": 7852624.0,
     "is_etf": true
    },
    {
-    "code": "010140",
-    "name": "삼성중공업",
-    "quantity_K": -704.0,
-    "amount_M": -15425.0,
-    "volume": 2814939.0,
+    "code": "042660",
+    "name": "한화오션",
+    "quantity_K": -195.0,
+    "amount_M": -17402.0,
+    "volume": 1138579.0,
     "is_etf": false
    },
    {
-    "code": "379800",
-    "name": "KODEX 미국S&P500",
-    "quantity_K": -622.0,
-    "amount_M": -15384.0,
-    "volume": 10923518.0,
-    "is_etf": true
-   },
-   {
-    "code": "267260",
-    "name": "HD현대일렉트릭",
-    "quantity_K": -20.0,
-    "amount_M": -14992.0,
-    "volume": 86122.0,
-    "is_etf": false
-   },
-   {
-    "code": "066570",
-    "name": "LG전자",
-    "quantity_K": -81.0,
-    "amount_M": -14784.0,
-    "volume": 800188.0,
+    "code": "033780",
+    "name": "KT&G",
+    "quantity_K": -96.0,
+    "amount_M": -17029.0,
+    "volume": 287554.0,
     "is_etf": false
    },
    {
     "code": "0094M0",
     "name": "RISE 코리아밸류업위클리고정커버드콜",
-    "quantity_K": -840.0,
-    "amount_M": -14746.0,
-    "volume": 1025885.0,
+    "quantity_K": -948.0,
+    "amount_M": -16942.0,
+    "volume": 1705789.0,
     "is_etf": true
+   },
+   {
+    "code": "379810",
+    "name": "KODEX 미국나스닥100",
+    "quantity_K": -609.0,
+    "amount_M": -16846.0,
+    "volume": 12079539.0,
+    "is_etf": true
+   },
+   {
+    "code": "012330",
+    "name": "현대모비스",
+    "quantity_K": -33.0,
+    "amount_M": -16423.0,
+    "volume": 263323.0,
+    "is_etf": false
+   },
+   {
+    "code": "379800",
+    "name": "KODEX 미국S&P500",
+    "quantity_K": -643.0,
+    "amount_M": -15856.0,
+    "volume": 18048562.0,
+    "is_etf": true
+   },
+   {
+    "code": "005490",
+    "name": "POSCO홀딩스",
+    "quantity_K": -46.0,
+    "amount_M": -15083.0,
+    "volume": 187542.0,
+    "is_etf": false
+   },
+   {
+    "code": "010060",
+    "name": "OCI홀딩스",
+    "quantity_K": -59.0,
+    "amount_M": -14984.0,
+    "volume": 410731.0,
+    "is_etf": false
    }
   ]
  },
  "focus_stocks": [
   {
-   "code": "000660",
-   "name": "SK하이닉스",
-   "buy_amount_M": 948604.0,
-   "industry": "반도체와반도체장비",
-   "close": 1504000.0,
-   "per": 14.53,
-   "cns_per": 4.3,
-   "pbr": 6.48,
-   "target_price": 3317917.0,
-   "upside_pct": 120.6,
-   "off_52w_high_pct": -49.9,
-   "foreign_5d_100M": -15924.6,
-   "foreign_20d_100M": -34505.5,
-   "organ_5d_100M": 1209.3,
-   "organ_20d_100M": -8778.3,
-   "foreign_streak": 1,
-   "organ_streak": 4,
-   "foreign_hold_pct": 50.83
-  },
-  {
    "code": "005930",
    "name": "삼성전자",
-   "buy_amount_M": 660583.0,
+   "buy_amount_M": 1673726.0,
    "industry": "반도체와반도체장비",
-   "close": 255500.0,
-   "per": 20.65,
-   "cns_per": 5.34,
-   "pbr": 3.55,
+   "close": 268000.0,
+   "per": 21.66,
+   "cns_per": 5.6,
+   "pbr": 3.73,
    "target_price": 491875.0,
-   "upside_pct": 92.5,
-   "off_52w_high_pct": -32.8,
-   "foreign_5d_100M": -621.7,
-   "foreign_20d_100M": 2022.7,
-   "organ_5d_100M": 1458.9,
-   "organ_20d_100M": -28740.9,
+   "upside_pct": 83.5,
+   "off_52w_high_pct": -29.5,
+   "foreign_5d_100M": 5526.8,
+   "foreign_20d_100M": -4083.6,
+   "organ_5d_100M": 19131.8,
+   "organ_20d_100M": -12725.1,
+   "foreign_streak": 0,
+   "organ_streak": 5,
+   "foreign_hold_pct": 46.7
+  },
+  {
+   "code": "000660",
+   "name": "SK하이닉스",
+   "buy_amount_M": 1133861.0,
+   "industry": "반도체와반도체장비",
+   "close": 1593000.0,
+   "per": 15.39,
+   "cns_per": 4.56,
+   "pbr": 6.87,
+   "target_price": 3317917.0,
+   "upside_pct": 108.3,
+   "off_52w_high_pct": -46.9,
+   "foreign_5d_100M": 10900.5,
+   "foreign_20d_100M": -31047.9,
+   "organ_5d_100M": 7855.7,
+   "organ_20d_100M": -11780.4,
    "foreign_streak": 2,
-   "organ_streak": 4,
-   "foreign_hold_pct": 46.71
+   "organ_streak": 5,
+   "foreign_hold_pct": 50.96
   },
   {
    "code": "009150",
    "name": "삼성전기",
    "buy_amount_M": 283424.0,
    "industry": "전자장비와기기",
-   "close": 1335000.0,
-   "per": 126.1,
-   "cns_per": 67.62,
-   "pbr": 10.28,
+   "close": 1503000.0,
+   "per": 141.97,
+   "cns_per": 76.13,
+   "pbr": 11.57,
    "target_price": 2350500.0,
-   "upside_pct": 76.1,
-   "off_52w_high_pct": -44.8,
-   "foreign_5d_100M": -5936.5,
-   "foreign_20d_100M": -10545.5,
-   "organ_5d_100M": 2248.3,
-   "organ_20d_100M": 4454.5,
-   "foreign_streak": 1,
-   "organ_streak": 1,
-   "foreign_hold_pct": 38.59
+   "upside_pct": 56.4,
+   "off_52w_high_pct": -37.8,
+   "foreign_5d_100M": 953.0,
+   "foreign_20d_100M": -9638.8,
+   "organ_5d_100M": 1645.7,
+   "organ_20d_100M": 4442.2,
+   "foreign_streak": 2,
+   "organ_streak": 2,
+   "foreign_hold_pct": 38.73
   },
   {
    "code": "066570",
    "name": "LG전자",
    "buy_amount_M": 184219.0,
    "industry": "전자제품",
-   "close": 205000.0,
-   "per": 37.82,
-   "cns_per": 16.23,
-   "pbr": 1.44,
-   "target_price": 230000.0,
-   "upside_pct": 12.2,
-   "off_52w_high_pct": -56.1,
-   "foreign_5d_100M": 469.1,
-   "foreign_20d_100M": 1176.2,
-   "organ_5d_100M": 929.0,
-   "organ_20d_100M": 1530.7,
-   "foreign_streak": 1,
-   "organ_streak": 1,
-   "foreign_hold_pct": 29.21
+   "close": 206500.0,
+   "per": 38.1,
+   "cns_per": 16.26,
+   "pbr": 1.45,
+   "target_price": 232188.0,
+   "upside_pct": 12.4,
+   "off_52w_high_pct": -55.8,
+   "foreign_5d_100M": 665.6,
+   "foreign_20d_100M": 1094.5,
+   "organ_5d_100M": 792.4,
+   "organ_20d_100M": 1249.5,
+   "foreign_streak": 2,
+   "organ_streak": 0,
+   "foreign_hold_pct": 29.22
   },
   {
    "code": "402340",
    "name": "SK스퀘어",
-   "buy_amount_M": 123671.0,
+   "buy_amount_M": 158034.0,
    "industry": "반도체와반도체장비",
-   "close": 1024000.0,
-   "per": 8.7,
-   "cns_per": 3.46,
-   "pbr": 3.74,
+   "close": 1117000.0,
+   "per": 9.49,
+   "cns_per": 3.77,
+   "pbr": 4.08,
    "target_price": 1900000.0,
-   "upside_pct": 85.5,
-   "off_52w_high_pct": -56.2,
-   "foreign_5d_100M": 1849.4,
-   "foreign_20d_100M": 8452.8,
-   "organ_5d_100M": -2481.3,
-   "organ_20d_100M": -8912.1,
+   "upside_pct": 70.1,
+   "off_52w_high_pct": -52.2,
+   "foreign_5d_100M": 3594.3,
+   "foreign_20d_100M": 8167.5,
+   "organ_5d_100M": -1149.6,
+   "organ_20d_100M": -8802.6,
+   "foreign_streak": 5,
+   "organ_streak": 2,
+   "foreign_hold_pct": 46.32
+  },
+  {
+   "code": "035420",
+   "name": "NAVER",
+   "buy_amount_M": 107901.0,
+   "industry": "양방향미디어와서비스",
+   "close": 226500.0,
+   "per": 19.66,
+   "cns_per": 18.1,
+   "pbr": 1.15,
+   "target_price": 330565.0,
+   "upside_pct": 45.9,
+   "off_52w_high_pct": -26.6,
+   "foreign_5d_100M": 60.3,
+   "foreign_20d_100M": -459.1,
+   "organ_5d_100M": -194.0,
+   "organ_20d_100M": 4077.9,
    "foreign_streak": 4,
    "organ_streak": 1,
-   "foreign_hold_pct": 46.28
+   "foreign_hold_pct": 35.28
+  },
+  {
+   "code": "329180",
+   "name": "HD현대중공업",
+   "buy_amount_M": 82648.0,
+   "industry": "조선",
+   "close": 496000.0,
+   "per": 24.51,
+   "cns_per": 16.13,
+   "pbr": 5.36,
+   "target_price": 860947.0,
+   "upside_pct": 73.6,
+   "off_52w_high_pct": -35.4,
+   "foreign_5d_100M": 575.2,
+   "foreign_20d_100M": 163.9,
+   "organ_5d_100M": -1107.8,
+   "organ_20d_100M": -162.7,
+   "foreign_streak": 3,
+   "organ_streak": 0,
+   "foreign_hold_pct": 13.85
+  },
+  {
+   "code": "161890",
+   "name": "한국콜마",
+   "buy_amount_M": 76823.0,
+   "industry": "화장품",
+   "close": 135200.0,
+   "per": 20.33,
+   "cns_per": 18.21,
+   "pbr": 3.41,
+   "target_price": 137412.0,
+   "upside_pct": 1.6,
+   "off_52w_high_pct": -6.1,
+   "foreign_5d_100M": 173.0,
+   "foreign_20d_100M": 481.9,
+   "organ_5d_100M": -31.6,
+   "organ_20d_100M": -172.9,
+   "foreign_streak": 1,
+   "organ_streak": 0,
+   "foreign_hold_pct": 40.74
+  },
+  {
+   "code": "034020",
+   "name": "두산에너빌리티",
+   "buy_amount_M": 58235.0,
+   "industry": "기계",
+   "close": 80900.0,
+   "per": 335.68,
+   "cns_per": 164.1,
+   "pbr": 6.45,
+   "target_price": 129375.0,
+   "upside_pct": 59.9,
+   "off_52w_high_pct": -41.9,
+   "foreign_5d_100M": -221.1,
+   "foreign_20d_100M": 605.3,
+   "organ_5d_100M": -175.0,
+   "organ_20d_100M": 266.6,
+   "foreign_streak": 2,
+   "organ_streak": 0,
+   "foreign_hold_pct": 24.08
+  },
+  {
+   "code": "105560",
+   "name": "KB금융",
+   "buy_amount_M": 53868.0,
+   "industry": "은행",
+   "close": 168100.0,
+   "per": 10.63,
+   "cns_per": 9.14,
+   "pbr": 1.01,
+   "target_price": 224889.0,
+   "upside_pct": 33.8,
+   "off_52w_high_pct": -14.2,
+   "foreign_5d_100M": 182.9,
+   "foreign_20d_100M": -182.1,
+   "organ_5d_100M": -403.8,
+   "organ_20d_100M": 106.1,
+   "foreign_streak": 2,
+   "organ_streak": 0,
+   "foreign_hold_pct": 79.31
+  },
+  {
+   "code": "011070",
+   "name": "LG이노텍",
+   "buy_amount_M": 38804.0,
+   "industry": "전자장비와기기",
+   "close": 615000.0,
+   "per": 30.02,
+   "cns_per": 15.76,
+   "pbr": 2.39,
+   "target_price": 1155500.0,
+   "upside_pct": 87.9,
+   "off_52w_high_pct": -66.1,
+   "foreign_5d_100M": -213.3,
+   "foreign_20d_100M": -29.9,
+   "organ_5d_100M": 254.1,
+   "organ_20d_100M": -1117.7,
+   "foreign_streak": 0,
+   "organ_streak": 0,
+   "foreign_hold_pct": 27.26
+  },
+  {
+   "code": "207940",
+   "name": "삼성바이오로직스",
+   "buy_amount_M": 38541.0,
+   "industry": "제약",
+   "close": 1564000.0,
+   "per": 50.81,
+   "cns_per": 38.6,
+   "pbr": 9.13,
+   "target_price": 2011429.0,
+   "upside_pct": 28.6,
+   "off_52w_high_pct": -21.3,
+   "foreign_5d_100M": 1014.8,
+   "foreign_20d_100M": 1562.6,
+   "organ_5d_100M": -159.8,
+   "organ_20d_100M": 2318.7,
+   "foreign_streak": 9,
+   "organ_streak": 0,
+   "foreign_hold_pct": 13.19
+  },
+  {
+   "code": "009540",
+   "name": "HD한국조선해양",
+   "buy_amount_M": 38160.0,
+   "industry": "조선",
+   "close": 371500.0,
+   "per": 10.44,
+   "cns_per": 6.85,
+   "pbr": 1.94,
+   "target_price": 555667.0,
+   "upside_pct": 49.6,
+   "off_52w_high_pct": -24.9,
+   "foreign_5d_100M": 244.8,
+   "foreign_20d_100M": -680.7,
+   "organ_5d_100M": -538.2,
+   "organ_20d_100M": 945.2,
+   "foreign_streak": 1,
+   "organ_streak": 0,
+   "foreign_hold_pct": 33.15
   },
   {
    "code": "068270",
    "name": "셀트리온",
-   "buy_amount_M": 74938.0,
+   "buy_amount_M": 37653.0,
    "industry": "제약",
    "close": 202000.0,
    "per": 38.65,
@@ -1147,92 +1307,52 @@
    "target_price": 275340.0,
    "upside_pct": 36.3,
    "off_52w_high_pct": -15.6,
-   "foreign_5d_100M": 1346.9,
-   "foreign_20d_100M": 1994.4,
-   "organ_5d_100M": 440.9,
-   "organ_20d_100M": 2101.2,
-   "foreign_streak": 7,
-   "organ_streak": 0,
-   "foreign_hold_pct": 25.43
-  },
-  {
-   "code": "011070",
-   "name": "LG이노텍",
-   "buy_amount_M": 48642.0,
-   "industry": "전자장비와기기",
-   "close": 604000.0,
-   "per": 29.49,
-   "cns_per": 15.48,
-   "pbr": 2.35,
-   "target_price": 1155500.0,
-   "upside_pct": 91.3,
-   "off_52w_high_pct": -66.7,
-   "foreign_5d_100M": -224.3,
-   "foreign_20d_100M": 517.4,
-   "organ_5d_100M": 241.7,
-   "organ_20d_100M": -1156.1,
-   "foreign_streak": 0,
-   "organ_streak": 1,
-   "foreign_hold_pct": 27.39
-  },
-  {
-   "code": "207940",
-   "name": "삼성바이오로직스",
-   "buy_amount_M": 44342.0,
-   "industry": "제약",
-   "close": 1549000.0,
-   "per": 50.33,
-   "cns_per": 38.23,
-   "pbr": 9.04,
-   "target_price": 2011429.0,
-   "upside_pct": 29.9,
-   "off_52w_high_pct": -22.0,
-   "foreign_5d_100M": 782.1,
-   "foreign_20d_100M": 1401.7,
-   "organ_5d_100M": 254.2,
-   "organ_20d_100M": 2577.4,
+   "foreign_5d_100M": 1629.6,
+   "foreign_20d_100M": 2144.8,
+   "organ_5d_100M": -271.1,
+   "organ_20d_100M": 1841.9,
    "foreign_streak": 8,
    "organ_streak": 0,
-   "foreign_hold_pct": 13.14
+   "foreign_hold_pct": 25.51
   },
   {
-   "code": "005935",
-   "name": "삼성전자우",
-   "buy_amount_M": 37729.0,
-   "industry": "반도체와반도체장비",
-   "close": 186100.0,
-   "per": 15.04,
-   "cns_per": 3.89,
-   "pbr": 2.59,
-   "target_price": 491875.0,
-   "upside_pct": 164.3,
-   "off_52w_high_pct": -23.6,
-   "foreign_5d_100M": -1461.4,
-   "foreign_20d_100M": 2235.5,
-   "organ_5d_100M": 222.2,
-   "organ_20d_100M": 774.8,
-   "foreign_streak": 0,
-   "organ_streak": 4,
-   "foreign_hold_pct": 76.73
+   "code": "298040",
+   "name": "효성중공업",
+   "buy_amount_M": 37415.0,
+   "industry": "전기장비",
+   "close": 3017000.0,
+   "per": 55.71,
+   "cns_per": 36.46,
+   "pbr": 11.72,
+   "target_price": 4235385.0,
+   "upside_pct": 40.4,
+   "off_52w_high_pct": -38.0,
+   "foreign_5d_100M": -37.4,
+   "foreign_20d_100M": 287.6,
+   "organ_5d_100M": 514.9,
+   "organ_20d_100M": 102.9,
+   "foreign_streak": 2,
+   "organ_streak": 2,
+   "foreign_hold_pct": 26.9
   },
   {
    "code": "006400",
    "name": "삼성SDI",
    "buy_amount_M": 37410.0,
    "industry": "전기제품",
-   "close": 485500.0,
+   "close": 487000.0,
    "per": null,
-   "cns_per": 58.89,
-   "pbr": 1.69,
+   "cns_per": 59.07,
+   "pbr": 1.7,
    "target_price": 694842.0,
-   "upside_pct": 43.1,
-   "off_52w_high_pct": -40.8,
-   "foreign_5d_100M": -556.0,
-   "foreign_20d_100M": -95.0,
-   "organ_5d_100M": 1437.1,
-   "organ_20d_100M": 579.4,
-   "foreign_streak": 1,
-   "organ_streak": 4,
+   "upside_pct": 42.7,
+   "off_52w_high_pct": -40.6,
+   "foreign_5d_100M": -422.0,
+   "foreign_20d_100M": 130.4,
+   "organ_5d_100M": 1369.2,
+   "organ_20d_100M": 1.1,
+   "foreign_streak": 2,
+   "organ_streak": 0,
    "foreign_hold_pct": 26.4
   },
   {
@@ -1240,410 +1360,297 @@
    "name": "현대차",
    "buy_amount_M": 37084.0,
    "industry": "자동차",
-   "close": 409500.0,
-   "per": 12.62,
-   "cns_per": 10.77,
-   "pbr": 0.9,
+   "close": 418500.0,
+   "per": 12.9,
+   "cns_per": 11.01,
+   "pbr": 0.92,
    "target_price": 722000.0,
-   "upside_pct": 76.3,
-   "off_52w_high_pct": -48.0,
-   "foreign_5d_100M": 838.1,
-   "foreign_20d_100M": 1862.4,
-   "organ_5d_100M": -330.5,
-   "organ_20d_100M": -1499.2,
-   "foreign_streak": 1,
+   "upside_pct": 72.5,
+   "off_52w_high_pct": -46.8,
+   "foreign_5d_100M": 983.3,
+   "foreign_20d_100M": 1770.7,
+   "organ_5d_100M": -868.9,
+   "organ_20d_100M": -1660.9,
+   "foreign_streak": 2,
    "organ_streak": 0,
-   "foreign_hold_pct": 25.03
+   "foreign_hold_pct": 25.05
   },
   {
-   "code": "009830",
-   "name": "한화솔루션",
-   "buy_amount_M": 32459.0,
-   "industry": "에너지장비및서비스",
-   "close": 35700.0,
-   "per": null,
-   "cns_per": 22.11,
-   "pbr": 0.71,
-   "target_price": 44835.0,
-   "upside_pct": 25.6,
-   "off_52w_high_pct": -36.2,
-   "foreign_5d_100M": -527.7,
-   "foreign_20d_100M": -1158.6,
-   "organ_5d_100M": 1013.2,
-   "organ_20d_100M": 1157.6,
-   "foreign_streak": 1,
-   "organ_streak": 7,
-   "foreign_hold_pct": 11.89
-  },
-  {
-   "code": "018260",
-   "name": "삼성에스디에스",
-   "buy_amount_M": 26494.0,
-   "industry": "IT서비스",
-   "close": 235500.0,
-   "per": 28.45,
-   "cns_per": 25.98,
-   "pbr": 1.84,
-   "target_price": 266643.0,
-   "upside_pct": 13.2,
-   "off_52w_high_pct": -39.5,
-   "foreign_5d_100M": -203.0,
-   "foreign_20d_100M": -547.4,
-   "organ_5d_100M": 491.1,
-   "organ_20d_100M": 1781.6,
+   "code": "010120",
+   "name": "LS ELECTRIC",
+   "buy_amount_M": 33926.0,
+   "industry": "전기장비",
+   "close": 214000.0,
+   "per": 95.2,
+   "cns_per": 59.31,
+   "pbr": 15.39,
+   "target_price": 300000.0,
+   "upside_pct": 40.2,
+   "off_52w_high_pct": -36.1,
+   "foreign_5d_100M": 110.4,
+   "foreign_20d_100M": 583.9,
+   "organ_5d_100M": 121.1,
+   "organ_20d_100M": 252.8,
    "foreign_streak": 0,
    "organ_streak": 2,
-   "foreign_hold_pct": 18.14
+   "foreign_hold_pct": 18.41
   },
   {
-   "code": "161890",
-   "name": "한국콜마",
-   "buy_amount_M": 25832.0,
-   "industry": "화장품",
-   "close": 132500.0,
-   "per": 19.92,
-   "cns_per": 17.93,
-   "pbr": 3.34,
-   "target_price": 135647.0,
-   "upside_pct": 2.4,
-   "off_52w_high_pct": -5.1,
-   "foreign_5d_100M": -365.0,
-   "foreign_20d_100M": -75.3,
-   "organ_5d_100M": 255.0,
-   "organ_20d_100M": 74.4,
-   "foreign_streak": 0,
-   "organ_streak": 1,
-   "foreign_hold_pct": 39.0
+   "code": "012450",
+   "name": "한화에어로스페이스",
+   "buy_amount_M": 31181.0,
+   "industry": "우주항공과국방",
+   "close": 1185000.0,
+   "per": 37.22,
+   "cns_per": 26.47,
+   "pbr": 6.12,
+   "target_price": 1628235.0,
+   "upside_pct": 37.4,
+   "off_52w_high_pct": -30.8,
+   "foreign_5d_100M": 364.5,
+   "foreign_20d_100M": 381.4,
+   "organ_5d_100M": -194.3,
+   "organ_20d_100M": 585.5,
+   "foreign_streak": 1,
+   "organ_streak": 0,
+   "foreign_hold_pct": 45.55
+  },
+  {
+   "code": "055550",
+   "name": "신한지주",
+   "buy_amount_M": 29375.0,
+   "industry": "은행",
+   "close": 106600.0,
+   "per": 10.17,
+   "cns_per": 8.57,
+   "pbr": 0.85,
+   "target_price": 137000.0,
+   "upside_pct": 28.5,
+   "off_52w_high_pct": -7.9,
+   "foreign_5d_100M": 99.0,
+   "foreign_20d_100M": 864.1,
+   "organ_5d_100M": 39.0,
+   "organ_20d_100M": -376.3,
+   "foreign_streak": 3,
+   "organ_streak": 0,
+   "foreign_hold_pct": 62.28
+  },
+  {
+   "code": "042700",
+   "name": "한미반도체",
+   "buy_amount_M": 28680.0,
+   "industry": "반도체와반도체장비",
+   "close": 226000.0,
+   "per": 121.05,
+   "cns_per": null,
+   "pbr": 33.71,
+   "target_price": 380000.0,
+   "upside_pct": 68.1,
+   "off_52w_high_pct": -46.9,
+   "foreign_5d_100M": 256.7,
+   "foreign_20d_100M": -894.7,
+   "organ_5d_100M": 472.8,
+   "organ_20d_100M": 138.5,
+   "foreign_streak": 4,
+   "organ_streak": 4,
+   "foreign_hold_pct": 8.0
+  },
+  {
+   "code": "005490",
+   "name": "POSCO홀딩스",
+   "buy_amount_M": 28669.0,
+   "industry": "철강",
+   "close": 325500.0,
+   "per": 32.02,
+   "cns_per": 13.82,
+   "pbr": 0.43,
+   "target_price": 511412.0,
+   "upside_pct": 57.1,
+   "off_52w_high_pct": -39.9,
+   "foreign_5d_100M": 71.3,
+   "foreign_20d_100M": 860.6,
+   "organ_5d_100M": -323.1,
+   "organ_20d_100M": -735.2,
+   "foreign_streak": 2,
+   "organ_streak": 0,
+   "foreign_hold_pct": 32.55
   },
   {
    "code": "042660",
    "name": "한화오션",
    "buy_amount_M": 25831.0,
    "industry": "조선",
-   "close": 90100.0,
-   "per": 18.04,
-   "cns_per": 14.02,
-   "pbr": 4.05,
+   "close": 90700.0,
+   "per": 18.16,
+   "cns_per": 14.12,
+   "pbr": 4.07,
    "target_price": 141050.0,
-   "upside_pct": 56.5,
-   "off_52w_high_pct": -41.8,
-   "foreign_5d_100M": 382.7,
-   "foreign_20d_100M": 1381.8,
-   "organ_5d_100M": -370.9,
-   "organ_20d_100M": 162.9,
-   "foreign_streak": 1,
+   "upside_pct": 55.5,
+   "off_52w_high_pct": -41.4,
+   "foreign_5d_100M": 611.9,
+   "foreign_20d_100M": 1539.7,
+   "organ_5d_100M": -739.6,
+   "organ_20d_100M": -134.7,
+   "foreign_streak": 2,
    "organ_streak": 0,
-   "foreign_hold_pct": 10.09
+   "foreign_hold_pct": 10.23
   },
   {
    "code": "192820",
    "name": "코스맥스",
    "buy_amount_M": 24765.0,
    "industry": "화장품",
-   "close": 249500.0,
-   "per": 18.09,
-   "cns_per": 18.68,
-   "pbr": 4.83,
-   "target_price": 247778.0,
-   "upside_pct": -0.7,
-   "off_52w_high_pct": -4.0,
-   "foreign_5d_100M": 276.2,
-   "foreign_20d_100M": -5.5,
-   "organ_5d_100M": -12.3,
-   "organ_20d_100M": 523.3,
-   "foreign_streak": 4,
+   "close": 249000.0,
+   "per": 18.06,
+   "cns_per": 16.79,
+   "pbr": 4.82,
+   "target_price": 288222.0,
+   "upside_pct": 15.8,
+   "off_52w_high_pct": -5.0,
+   "foreign_5d_100M": 517.2,
+   "foreign_20d_100M": 174.7,
+   "organ_5d_100M": -129.4,
+   "organ_20d_100M": 485.6,
+   "foreign_streak": 5,
    "organ_streak": 0,
-   "foreign_hold_pct": 37.53
+   "foreign_hold_pct": 38.28
   },
   {
-   "code": "064400",
-   "name": "LG씨엔에스",
-   "buy_amount_M": 22911.0,
-   "industry": "IT서비스",
-   "close": 77300.0,
-   "per": 16.23,
-   "cns_per": 15.88,
-   "pbr": 2.56,
-   "target_price": 97727.0,
-   "upside_pct": 26.4,
-   "off_52w_high_pct": -49.6,
-   "foreign_5d_100M": -413.6,
-   "foreign_20d_100M": -559.3,
-   "organ_5d_100M": 371.2,
-   "organ_20d_100M": 894.0,
-   "foreign_streak": 0,
-   "organ_streak": 7,
-   "foreign_hold_pct": 5.21
-  },
-  {
-   "code": "267260",
-   "name": "HD현대일렉트릭",
-   "buy_amount_M": 22895.0,
-   "industry": "전기장비",
-   "close": 782000.0,
-   "per": 35.84,
-   "cns_per": 29.45,
-   "pbr": 13.53,
-   "target_price": 1193929.0,
-   "upside_pct": 52.7,
-   "off_52w_high_pct": -46.0,
-   "foreign_5d_100M": 53.9,
-   "foreign_20d_100M": 572.8,
-   "organ_5d_100M": -213.3,
-   "organ_20d_100M": -619.0,
-   "foreign_streak": 2,
-   "organ_streak": 0,
-   "foreign_hold_pct": 34.5
-  },
-  {
-   "code": "010950",
-   "name": "S-Oil",
-   "buy_amount_M": 20398.0,
-   "industry": "석유와가스",
-   "close": 141500.0,
-   "per": 17.51,
-   "cns_per": 5.87,
-   "pbr": 1.72,
-   "target_price": 164412.0,
-   "upside_pct": 16.2,
-   "off_52w_high_pct": -21.3,
-   "foreign_5d_100M": -499.8,
-   "foreign_20d_100M": -547.7,
-   "organ_5d_100M": 721.2,
-   "organ_20d_100M": 1462.2,
-   "foreign_streak": 1,
-   "organ_streak": 0,
-   "foreign_hold_pct": 79.4
-  },
-  {
-   "code": "034020",
-   "name": "두산에너빌리티",
-   "buy_amount_M": 20240.0,
-   "industry": "기계",
-   "close": 80300.0,
-   "per": 333.2,
-   "cns_per": 162.88,
-   "pbr": 6.4,
-   "target_price": 129375.0,
-   "upside_pct": 61.1,
-   "off_52w_high_pct": -42.3,
-   "foreign_5d_100M": -764.0,
-   "foreign_20d_100M": 209.6,
-   "organ_5d_100M": 494.0,
-   "organ_20d_100M": 755.3,
-   "foreign_streak": 1,
-   "organ_streak": 1,
-   "foreign_hold_pct": 23.96
-  },
-  {
-   "code": "010120",
-   "name": "LS ELECTRIC",
-   "buy_amount_M": 18543.0,
-   "industry": "전기장비",
-   "close": 208500.0,
-   "per": 92.75,
-   "cns_per": 57.79,
-   "pbr": 14.99,
-   "target_price": 300000.0,
-   "upside_pct": 43.9,
+   "code": "012330",
+   "name": "현대모비스",
+   "buy_amount_M": 24756.0,
+   "industry": "자동차부품",
+   "close": 511000.0,
+   "per": 13.34,
+   "cns_per": 11.19,
+   "pbr": 0.9,
+   "target_price": 737200.0,
+   "upside_pct": 44.3,
    "off_52w_high_pct": -37.8,
-   "foreign_5d_100M": 29.8,
-   "foreign_20d_100M": 588.6,
-   "organ_5d_100M": -11.1,
-   "organ_20d_100M": 168.3,
-   "foreign_streak": 3,
-   "organ_streak": 1,
-   "foreign_hold_pct": 18.38
-  },
-  {
-   "code": "000270",
-   "name": "기아",
-   "buy_amount_M": 18418.0,
-   "industry": "자동차",
-   "close": 135600.0,
-   "per": 7.63,
-   "cns_per": 6.2,
-   "pbr": 0.85,
-   "target_price": 217800.0,
-   "upside_pct": 60.6,
-   "off_52w_high_pct": -36.2,
-   "foreign_5d_100M": 611.0,
-   "foreign_20d_100M": 2488.7,
-   "organ_5d_100M": -190.4,
-   "organ_20d_100M": -1769.2,
-   "foreign_streak": 2,
-   "organ_streak": 0,
-   "foreign_hold_pct": 39.26
-  },
-  {
-   "code": "298040",
-   "name": "효성중공업",
-   "buy_amount_M": 18228.0,
-   "industry": "전기장비",
-   "close": 2892000.0,
-   "per": 53.4,
-   "cns_per": 34.95,
-   "pbr": 11.24,
-   "target_price": 4235385.0,
-   "upside_pct": 46.5,
-   "off_52w_high_pct": -40.6,
-   "foreign_5d_100M": -747.4,
-   "foreign_20d_100M": 437.9,
-   "organ_5d_100M": 404.3,
-   "organ_20d_100M": -281.3,
-   "foreign_streak": 1,
-   "organ_streak": 1,
-   "foreign_hold_pct": 26.85
-  },
-  {
-   "code": "006360",
-   "name": "GS건설",
-   "buy_amount_M": 17615.0,
-   "industry": "건설",
-   "close": 35200.0,
-   "per": 46.19,
-   "cns_per": 19.93,
-   "pbr": 0.62,
-   "target_price": 38667.0,
-   "upside_pct": 9.8,
-   "off_52w_high_pct": -21.5,
-   "foreign_5d_100M": -139.1,
-   "foreign_20d_100M": -273.4,
-   "organ_5d_100M": 940.7,
-   "organ_20d_100M": 1731.8,
-   "foreign_streak": 1,
-   "organ_streak": 10,
-   "foreign_hold_pct": 18.17
-  },
-  {
-   "code": "278470",
-   "name": "에이피알",
-   "buy_amount_M": 16477.0,
-   "industry": "화장품",
-   "close": 397000.0,
-   "per": 41.8,
-   "cns_per": 25.47,
-   "pbr": 29.34,
-   "target_price": 538500.0,
-   "upside_pct": 35.6,
-   "off_52w_high_pct": -16.1,
-   "foreign_5d_100M": 384.2,
-   "foreign_20d_100M": 323.8,
-   "organ_5d_100M": 112.3,
-   "organ_20d_100M": -28.4,
+   "foreign_5d_100M": 799.3,
+   "foreign_20d_100M": 2151.2,
+   "organ_5d_100M": -749.8,
+   "organ_20d_100M": -768.2,
    "foreign_streak": 4,
    "organ_streak": 0,
-   "foreign_hold_pct": 37.25
+   "foreign_hold_pct": 37.6
   }
  ],
  "sector_flow": [
   {
    "industry": "제약",
-   "foreign_20d_100M": 3396.1000000000004,
-   "organ_20d_100M": 4678.6,
+   "foreign_20d_100M": 3707.4,
+   "organ_20d_100M": 4160.6,
    "stocks": [
-    "셀트리온",
-    "삼성바이오로직스"
+    "삼성바이오로직스",
+    "셀트리온"
+   ]
+  },
+  {
+   "industry": "양방향미디어와서비스",
+   "foreign_20d_100M": -459.1,
+   "organ_20d_100M": 4077.9,
+   "stocks": [
+    "NAVER"
    ]
   },
   {
    "industry": "전자제품",
-   "foreign_20d_100M": 1176.2,
-   "organ_20d_100M": 1530.7,
+   "foreign_20d_100M": 1094.5,
+   "organ_20d_100M": 1249.5,
    "stocks": [
     "LG전자"
    ]
   },
   {
-   "industry": "IT서비스",
-   "foreign_20d_100M": -1106.6999999999998,
-   "organ_20d_100M": 2675.6,
-   "stocks": [
-    "삼성에스디에스",
-    "LG씨엔에스"
-   ]
-  },
-  {
    "industry": "조선",
-   "foreign_20d_100M": 1381.8,
-   "organ_20d_100M": 162.9,
+   "foreign_20d_100M": 1022.9,
+   "organ_20d_100M": 647.8,
    "stocks": [
+    "HD현대중공업",
+    "HD한국조선해양",
     "한화오션"
    ]
   },
   {
-   "industry": "건설",
-   "foreign_20d_100M": -273.4,
-   "organ_20d_100M": 1731.8,
+   "industry": "자동차부품",
+   "foreign_20d_100M": 2151.2,
+   "organ_20d_100M": -768.2,
    "stocks": [
-    "GS건설"
+    "현대모비스"
    ]
   },
   {
-   "industry": "자동차",
-   "foreign_20d_100M": 4351.1,
-   "organ_20d_100M": -3268.4,
+   "industry": "전기장비",
+   "foreign_20d_100M": 871.5,
+   "organ_20d_100M": 355.70000000000005,
    "stocks": [
-    "현대차",
-    "기아"
+    "효성중공업",
+    "LS ELECTRIC"
+   ]
+  },
+  {
+   "industry": "화장품",
+   "foreign_20d_100M": 656.5999999999999,
+   "organ_20d_100M": 312.70000000000005,
+   "stocks": [
+    "한국콜마",
+    "코스맥스"
+   ]
+  },
+  {
+   "industry": "우주항공과국방",
+   "foreign_20d_100M": 381.4,
+   "organ_20d_100M": 585.5,
+   "stocks": [
+    "한화에어로스페이스"
    ]
   },
   {
    "industry": "기계",
-   "foreign_20d_100M": 209.6,
-   "organ_20d_100M": 755.3,
+   "foreign_20d_100M": 605.3,
+   "organ_20d_100M": 266.6,
    "stocks": [
     "두산에너빌리티"
    ]
   },
   {
-   "industry": "석유와가스",
-   "foreign_20d_100M": -547.7,
-   "organ_20d_100M": 1462.2,
+   "industry": "은행",
+   "foreign_20d_100M": 682.0,
+   "organ_20d_100M": -270.20000000000005,
    "stocks": [
-    "S-Oil"
-   ]
-  },
-  {
-   "industry": "전기장비",
-   "foreign_20d_100M": 1599.3000000000002,
-   "organ_20d_100M": -732.0,
-   "stocks": [
-    "HD현대일렉트릭",
-    "LS ELECTRIC",
-    "효성중공업"
-   ]
-  },
-  {
-   "industry": "화장품",
-   "foreign_20d_100M": 243.0,
-   "organ_20d_100M": 569.3,
-   "stocks": [
-    "한국콜마",
-    "코스맥스",
-    "에이피알"
+    "KB금융",
+    "신한지주"
    ]
   },
   {
    "industry": "전기제품",
-   "foreign_20d_100M": -95.0,
-   "organ_20d_100M": 579.4,
+   "foreign_20d_100M": 130.4,
+   "organ_20d_100M": 1.1,
    "stocks": [
     "삼성SDI"
    ]
   },
   {
-   "industry": "에너지장비및서비스",
-   "foreign_20d_100M": -1158.6,
-   "organ_20d_100M": 1157.6,
+   "industry": "철강",
+   "foreign_20d_100M": 860.6,
+   "organ_20d_100M": -735.2,
    "stocks": [
-    "한화솔루션"
+    "POSCO홀딩스"
+   ]
+  },
+  {
+   "industry": "자동차",
+   "foreign_20d_100M": 1770.7,
+   "organ_20d_100M": -1660.9,
+   "stocks": [
+    "현대차"
    ]
   },
   {
    "industry": "전자장비와기기",
-   "foreign_20d_100M": -10028.1,
-   "organ_20d_100M": 3298.4,
+   "foreign_20d_100M": -9668.699999999999,
+   "organ_20d_100M": 3324.5,
    "stocks": [
     "삼성전기",
     "LG이노텍"
@@ -1651,13 +1658,13 @@
   },
   {
    "industry": "반도체와반도체장비",
-   "foreign_20d_100M": -21794.5,
-   "organ_20d_100M": -45656.49999999999,
+   "foreign_20d_100M": -27858.7,
+   "organ_20d_100M": -33169.6,
    "stocks": [
-    "SK하이닉스",
     "삼성전자",
+    "SK하이닉스",
     "SK스퀘어",
-    "삼성전자우"
+    "한미반도체"
    ]
   }
  ],
@@ -1665,106 +1672,106 @@
   {
    "code": "005930",
    "name": "삼성전자",
-   "close": 255500.0,
+   "close": 268000.0,
    "changeRate": 0.0,
    "tradingValue_M": null,
-   "marketValue_100M": 14937242.0
+   "marketValue_100M": 15668027.0
   },
   {
    "code": "000660",
    "name": "SK하이닉스",
-   "close": 1504000.0,
+   "close": 1593000.0,
    "changeRate": 0.0,
    "tradingValue_M": null,
-   "marketValue_100M": 10986605.0
+   "marketValue_100M": 11636743.0
   },
   {
    "code": "005935",
    "name": "삼성전자우",
-   "close": 186100.0,
+   "close": 187800.0,
    "changeRate": 0.0,
    "tradingValue_M": null,
-   "marketValue_100M": 1493213.0
+   "marketValue_100M": 1506853.0
   },
   {
    "code": "402340",
    "name": "SK스퀘어",
-   "close": 1024000.0,
+   "close": 1117000.0,
    "changeRate": 0.0,
    "tradingValue_M": null,
-   "marketValue_100M": 1351254.0
+   "marketValue_100M": 1473975.0
   },
   {
    "code": "009150",
    "name": "삼성전기",
-   "close": 1335000.0,
+   "close": 1503000.0,
    "changeRate": 0.0,
    "tradingValue_M": null,
-   "marketValue_100M": 997161.0
-  },
-  {
-   "code": "373220",
-   "name": "LG에너지솔루션",
-   "close": 358500.0,
-   "changeRate": 0.0,
-   "tradingValue_M": null,
-   "marketValue_100M": 838890.0
+   "marketValue_100M": 1122646.0
   },
   {
    "code": "005380",
    "name": "현대차",
-   "close": 409500.0,
+   "close": 418500.0,
    "changeRate": 0.0,
    "tradingValue_M": null,
-   "marketValue_100M": 838483.0
+   "marketValue_100M": 856911.0
+  },
+  {
+   "code": "373220",
+   "name": "LG에너지솔루션",
+   "close": 365500.0,
+   "changeRate": 0.0,
+   "tradingValue_M": null,
+   "marketValue_100M": 855270.0
   },
   {
    "code": "207940",
    "name": "삼성바이오로직스",
-   "close": 1549000.0,
+   "close": 1564000.0,
    "changeRate": 0.0,
    "tradingValue_M": null,
-   "marketValue_100M": 717047.0
-  },
-  {
-   "code": "032830",
-   "name": "삼성생명",
-   "close": 302500.0,
-   "changeRate": 0.0,
-   "tradingValue_M": null,
-   "marketValue_100M": 605000.0
+   "marketValue_100M": 723990.0
   },
   {
    "code": "012450",
    "name": "한화에어로스페이스",
-   "close": 1156000.0,
+   "close": 1185000.0,
    "changeRate": 0.0,
    "tradingValue_M": null,
-   "marketValue_100M": 596073.0
+   "marketValue_100M": 611026.0
   },
   {
    "code": "105560",
    "name": "KB금융",
-   "close": 166000.0,
+   "close": 168100.0,
    "changeRate": 0.0,
    "tradingValue_M": null,
-   "marketValue_100M": 588782.0
+   "marketValue_100M": 596230.0
   },
   {
    "code": "028260",
    "name": "삼성물산",
-   "close": 357500.0,
+   "close": 365000.0,
    "changeRate": 0.0,
    "tradingValue_M": null,
-   "marketValue_100M": 579749.0
+   "marketValue_100M": 591912.0
+  },
+  {
+   "code": "032830",
+   "name": "삼성생명",
+   "close": 291500.0,
+   "changeRate": 0.0,
+   "tradingValue_M": null,
+   "marketValue_100M": 583000.0
   },
   {
    "code": "000270",
    "name": "기아",
-   "close": 135600.0,
+   "close": 137400.0,
    "changeRate": 0.0,
    "tradingValue_M": null,
-   "marketValue_100M": 529400.0
+   "marketValue_100M": 536427.0
   },
   {
    "code": "329180",
@@ -1777,18 +1784,18 @@
   {
    "code": "034020",
    "name": "두산에너빌리티",
-   "close": 80300.0,
+   "close": 80900.0,
    "changeRate": 0.0,
    "tradingValue_M": null,
-   "marketValue_100M": 514371.0
+   "marketValue_100M": 518214.0
   },
   {
    "code": "055550",
    "name": "신한지주",
-   "close": 103800.0,
+   "close": 106600.0,
    "changeRate": 0.0,
    "tradingValue_M": null,
-   "marketValue_100M": 487289.0
+   "marketValue_100M": 500434.0
   },
   {
    "code": "068270",
@@ -1801,26 +1808,26 @@
   {
    "code": "012330",
    "name": "현대모비스",
-   "close": 498500.0,
+   "close": 511000.0,
    "changeRate": 0.0,
    "tradingValue_M": null,
-   "marketValue_100M": 452302.0
+   "marketValue_100M": 463643.0
   },
   {
    "code": "034730",
    "name": "SK",
-   "close": 545000.0,
+   "close": 553000.0,
    "changeRate": 0.0,
    "tradingValue_M": null,
-   "marketValue_100M": 395140.0
+   "marketValue_100M": 400940.0
   },
   {
    "code": "006400",
    "name": "삼성SDI",
-   "close": 485500.0,
+   "close": 487000.0,
    "changeRate": 0.0,
    "tradingValue_M": null,
-   "marketValue_100M": 391243.0
+   "marketValue_100M": 392452.0
   }
  ]
 }
