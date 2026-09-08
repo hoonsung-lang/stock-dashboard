@@ -1,5 +1,5 @@
 {
- "_generated": "2026-09-06 23:57:41",
+ "_generated": "2026-09-08 00:27:35",
  "asof": "2026-09-04",
  "sector_etfs": [
   {
@@ -81,22 +81,6 @@
    "rs_6m": 0.73,
    "vol_ratio_20_60": 0.86,
    "label": "금융"
-  },
-  {
-   "ticker": "IGV",
-   "ret_1d": -2.23,
-   "ret_1w": -4.5,
-   "ret_1m": 5.18,
-   "ret_3m": 9.12,
-   "ret_6m": 18.89,
-   "close": 104.57,
-   "off_52w_high_pct": -11.21,
-   "rs_1w": -4.61,
-   "rs_1m": 4.97,
-   "rs_3m": 4.42,
-   "rs_6m": 3.74,
-   "vol_ratio_20_60": 0.81,
-   "label": "소프트웨어"
   },
   {
    "ticker": "KRE",
@@ -401,6 +385,22 @@
    "rs_6m": -12.93,
    "vol_ratio_20_60": 1.09,
    "label": "클린에너지"
+  },
+  {
+   "ticker": "IGV",
+   "ret_1d": NaN,
+   "ret_1w": NaN,
+   "ret_1m": NaN,
+   "ret_3m": NaN,
+   "ret_6m": NaN,
+   "close": NaN,
+   "off_52w_high_pct": NaN,
+   "rs_1w": NaN,
+   "rs_1m": NaN,
+   "rs_3m": NaN,
+   "rs_6m": NaN,
+   "vol_ratio_20_60": NaN,
+   "label": "소프트웨어"
   }
  ],
  "momentum_top": [
@@ -443,7 +443,7 @@
    "sector": "Health Care",
    "industry": "Health Care Technology",
    "marketCap_B": 44.5,
-   "forwardPE": 26.861557,
+   "forwardPE": 26.838388,
    "pegRatio": 1.2674,
    "revenueGrowth_pct": 17.6,
    "earningsGrowth_pct": 39.5,
@@ -471,10 +471,10 @@
    "pegRatio": 2.1775,
    "revenueGrowth_pct": 32.3,
    "earningsGrowth_pct": 47.6,
-   "targetMeanPrice": 123.37556,
+   "targetMeanPrice": 125.44963,
    "currentPrice": 122.11,
    "recommendationMean": 1.65517,
-   "upside_pct": 1.0
+   "upside_pct": 2.7
   },
   {
    "ticker": "MPC",
@@ -635,7 +635,7 @@
    "sector": "Information Technology",
    "industry": "Electronic Equipment & Instruments",
    "marketCap_B": 17.2,
-   "forwardPE": 16.310501,
+   "forwardPE": 16.353304,
    "pegRatio": 0.6022,
    "revenueGrowth_pct": 20.4,
    "earningsGrowth_pct": 121.5,
@@ -779,7 +779,7 @@
    "sector": "Consumer Staples",
    "industry": "Consumer Staples Merchandise Retail",
    "marketCap_B": 74.7,
-   "forwardPE": 17.262085,
+   "forwardPE": 17.232924,
    "pegRatio": 2.0414,
    "revenueGrowth_pct": 5.3,
    "earningsGrowth_pct": 100.5,
@@ -970,7 +970,7 @@
    "name": "Best Buy",
    "sector": "Consumer Discretionary",
    "industry": "Computer & Electronics Retail",
-   "marketCap_B": 19.0,
+   "marketCap_B": 18.9,
    "forwardPE": 12.518305,
    "pegRatio": 1.6684,
    "revenueGrowth_pct": 3.6,
@@ -1023,10 +1023,10 @@
    "pegRatio": 2.7703,
    "revenueGrowth_pct": 35.6,
    "earningsGrowth_pct": -30.0,
-   "targetMeanPrice": 253.83333,
+   "targetMeanPrice": 254.42857,
    "currentPrice": 211.73,
-   "recommendationMean": 1.62222,
-   "upside_pct": 19.9
+   "recommendationMean": 1.63636,
+   "upside_pct": 20.2
   },
   {
    "ticker": "TMO",
@@ -1091,7 +1091,7 @@
    "sector": "Consumer Staples",
    "industry": "Consumer Staples Merchandise Retail",
    "marketCap_B": 29.4,
-   "forwardPE": 16.123959,
+   "forwardPE": 16.14659,
    "pegRatio": 1.8061,
    "revenueGrowth_pct": 5.2,
    "earningsGrowth_pct": 33.3,
